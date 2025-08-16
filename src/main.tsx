@@ -19,7 +19,7 @@ if ('serviceWorker' in navigator) {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Mapmykidz">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
