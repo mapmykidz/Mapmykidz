@@ -43,6 +43,11 @@ export const InputPage: React.FC = () => {
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
     }
+    
+    // Clear measurements error when user selects measurements
+    if (field === 'selectedMeasurements' && value && value.length > 0) {
+      setErrors(prev => ({ ...prev, measurements: '' }))
+    }
   }
 
   const handleBlur = (field: string) => {
@@ -86,7 +91,7 @@ export const InputPage: React.FC = () => {
         }
         break
       case 'height':
-        if ((data.selectedMeasurements?.includes('height') ?? true)) {
+        if (data.selectedMeasurements?.includes('height')) {
         if (!data.height || data.height <= 0) {
           newErrors.height = 'Please enter a valid height'
         } else {
@@ -143,8 +148,17 @@ export const InputPage: React.FC = () => {
   }
 
   const validateForm = (): boolean => {
-    const fields = ['gender', 'dateOfBirth', 'measurementDate', 'height', 'motherHeight', 'fatherHeight'] as string[]
-    if ((childData as any).selectedMeasurements?.includes('weight')) {
+    // Check if at least one measurement is selected
+    if (!childData.selectedMeasurements || childData.selectedMeasurements.length === 0) {
+      setErrors({ measurements: 'Please select at least one measurement type' })
+      return false
+    }
+
+    const fields = ['gender', 'dateOfBirth', 'measurementDate'] as string[]
+    if (childData.selectedMeasurements?.includes('height')) {
+      fields.push('height', 'motherHeight', 'fatherHeight')
+    }
+    if (childData.selectedMeasurements?.includes('weight')) {
       fields.push('weight')
     }
 
@@ -186,15 +200,15 @@ export const InputPage: React.FC = () => {
       newErrors.measurementDate = 'Measurement date cannot be before birth date'
     }
 
-    // height (required if selected or if no selection defaults to height)
-    if ((data.selectedMeasurements?.includes('height') ?? true)) {
-    if (!data.height || data.height <= 0) {
-      newErrors.height = 'Please enter a valid height'
-    } else {
-      const minHeight = data.heightUnit === 'cm' ? 30 : 12
-      const maxHeight = data.heightUnit === 'cm' ? 220 : 87
-      if (data.height < minHeight || data.height > maxHeight) {
-        newErrors.height = `Height must be between ${minHeight} and ${maxHeight} ${data.heightUnit}`
+    // height (required only if selected)
+    if (data.selectedMeasurements?.includes('height')) {
+      if (!data.height || data.height <= 0) {
+        newErrors.height = 'Please enter a valid height'
+      } else {
+        const minHeight = data.heightUnit === 'cm' ? 30 : 12
+        const maxHeight = data.heightUnit === 'cm' ? 220 : 87
+        if (data.height < minHeight || data.height > maxHeight) {
+          newErrors.height = `Height must be between ${minHeight} and ${maxHeight} ${data.heightUnit}`
         }
       }
     }
@@ -212,25 +226,29 @@ export const InputPage: React.FC = () => {
       }
     }
 
-    // motherHeight
-    if (!data.motherHeight || data.motherHeight <= 0) {
-      newErrors.motherHeight = 'Please enter mother\'s height'
-    } else {
-      const minHeight = data.motherHeightUnit === 'cm' ? 120 : 47
-      const maxHeight = data.motherHeightUnit === 'cm' ? 220 : 87
-      if (data.motherHeight < minHeight || data.motherHeight > maxHeight) {
-        newErrors.motherHeight = `Height must be between ${minHeight} and ${maxHeight} ${data.motherHeightUnit}`
+    // motherHeight (required only if height is selected)
+    if (data.selectedMeasurements?.includes('height')) {
+      if (!data.motherHeight || data.motherHeight <= 0) {
+        newErrors.motherHeight = 'Please enter mother\'s height'
+      } else {
+        const minHeight = data.motherHeightUnit === 'cm' ? 120 : 47
+        const maxHeight = data.motherHeightUnit === 'cm' ? 220 : 87
+        if (data.motherHeight < minHeight || data.motherHeight > maxHeight) {
+          newErrors.motherHeight = `Height must be between ${minHeight} and ${maxHeight} ${data.motherHeightUnit}`
+        }
       }
     }
 
-    // fatherHeight
-    if (!data.fatherHeight || data.fatherHeight <= 0) {
-      newErrors.fatherHeight = 'Please enter father\'s height'
-    } else {
-      const minHeight = data.fatherHeightUnit === 'cm' ? 120 : 47
-      const maxHeight = data.fatherHeightUnit === 'cm' ? 220 : 87
-      if (data.fatherHeight < minHeight || data.fatherHeight > maxHeight) {
-        newErrors.fatherHeight = `Height must be between ${minHeight} and ${maxHeight} ${data.fatherHeightUnit}`
+    // fatherHeight (required only if height is selected)
+    if (data.selectedMeasurements?.includes('height')) {
+      if (!data.fatherHeight || data.fatherHeight <= 0) {
+        newErrors.fatherHeight = 'Please enter father\'s height'
+      } else {
+        const minHeight = data.fatherHeightUnit === 'cm' ? 120 : 47
+        const maxHeight = data.fatherHeightUnit === 'cm' ? 220 : 87
+        if (data.fatherHeight < minHeight || data.fatherHeight > maxHeight) {
+          newErrors.fatherHeight = `Height must be between ${minHeight} and ${maxHeight} ${data.fatherHeightUnit}`
+        }
       }
     }
 
@@ -370,6 +388,14 @@ export const InputPage: React.FC = () => {
               )}
             </button>
           </div>
+          
+          {/* Error message for measurement selection */}
+          {errors.measurements && (
+            <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3 flex items-center space-x-2">
+              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
+              <p className="text-sm text-red-700">{errors.measurements}</p>
+            </div>
+          )}
         </div>
 
           {/* Child Information (only shown when at least one measurement is selected) */}
