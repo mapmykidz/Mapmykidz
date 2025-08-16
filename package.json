@@ -2,7 +2,7 @@
   "name": "mapmykidz",
   "version": "1.0.0",
   "description": "A pediatric growth tracking application for calculating WHO/CDC percentiles and Z-scores",
-  "homepage": "https://yourusername.github.io/Mapmykidz",
+  "homepage": "https://mapmykidz.github.io/Mapmykidz",
   "private": true,
   "type": "module",
   "scripts": {
