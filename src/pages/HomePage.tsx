@@ -27,7 +27,7 @@ export const HomePage: React.FC = () => {
     {
       icon: Globe,
       title: 'Global Standards',
-      description: 'Based on internationally recognized WHO (0-5 years) and CDC (2-20 years) standards'
+      description: 'Based on internationally recognized WHO (0-2 years) and CDC (2-20 years) standards'
     },
     {
       icon: Award,
@@ -75,7 +75,7 @@ export const HomePage: React.FC = () => {
             Complete Child Growth Tracker
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-            Track height, weight, and BMI percentiles using WHO (0-5 years) and CDC (2-20 years) standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
+            Track height, weight, and BMI percentiles using WHO (0-2 years) and CDC (2-20 years) standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
