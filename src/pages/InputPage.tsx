@@ -323,9 +323,21 @@ export const InputPage: React.FC = () => {
             <div className="flex items-center space-x-3">
               <h2 className="section-title mb-0">Select Measurements</h2>
             </div>
-            <div className="text-sm text-primary-700 space-x-4">
-              <button type="button" className="underline" onClick={() => handleInputChange('selectedMeasurements' as any, ['height','weight','bmi'])}>Select all</button>
-              <button type="button" className="underline" onClick={() => handleInputChange('selectedMeasurements' as any, [])}>Clear</button>
+            <div className="flex space-x-2">
+              <button 
+                type="button" 
+                className="px-3 py-1 text-xs font-medium text-primary-700 bg-primary-50 border border-primary-200 rounded-md hover:bg-primary-100 hover:border-primary-300 transition-colors" 
+                onClick={() => handleInputChange('selectedMeasurements' as any, ['height','weight','bmi'])}
+              >
+                Select all
+              </button>
+              <button 
+                type="button" 
+                className="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300 transition-colors" 
+                onClick={() => handleInputChange('selectedMeasurements' as any, [])}
+              >
+                Clear
+              </button>
             </div>
           </div>
 
