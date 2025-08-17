@@ -25,7 +25,7 @@ export const AboutPage: React.FC = () => {
     },
     {
       icon: Activity,
-      title: 'Growth-for-Age Assessment',
+      title: 'Growth-for-Age Tracking',
       description: 'Calculate weight-for-length (0-2 years) and BMI (2-20 years) using WHO and CDC standards.',
     },
     {
@@ -100,7 +100,7 @@ export const AboutPage: React.FC = () => {
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong>Growth-for-Age Assessment:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
+                  <strong>Growth-for-Age Tracking:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
                 </div>
               </li>
             </ul>
