@@ -100,7 +100,7 @@ export const AboutPage: React.FC = () => {
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong>Growth-for-Age Tracking:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
+                  <strong>Growth-for-age:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
                 </div>
               </li>
             </ul>
@@ -202,10 +202,7 @@ export const AboutPage: React.FC = () => {
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div><strong>BMI Formula (2-20 years):</strong> BMI = weight (kg) ÷ height (m)²</div>
               </li>
-              <li className="flex items-start space-x-2">
-                <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div><strong>WHO BMI-for-age (0-2 years):</strong> Standards for healthy growth patterns</div>
-              </li>
+
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div><strong>CDC BMI-for-age (2-20 years):</strong> Charts for monitoring body composition</div>
