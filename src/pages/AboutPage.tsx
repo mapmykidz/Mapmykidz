@@ -25,7 +25,7 @@ export const AboutPage: React.FC = () => {
     },
     {
       icon: Activity,
-      title: 'Growth Assessment',
+      title: 'Growth-for-Age Assessment',
       description: 'Calculate weight-for-length (0-2 years) and BMI (2-20 years) using WHO and CDC standards.',
     },
     {
@@ -100,7 +100,7 @@ export const AboutPage: React.FC = () => {
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong>Growth Assessment:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
+                  <strong>Growth-for-Age Assessment:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
                 </div>
               </li>
             </ul>
@@ -189,7 +189,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Growth Assessment Analysis</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Growth-for-Age Analysis</h3>
             <p className="text-gray-600 mb-3">
               For children 0-2 years, we use weight-for-length (WFL) measurements. For children 2-20 years, we use Body Mass Index (BMI):
             </p>
