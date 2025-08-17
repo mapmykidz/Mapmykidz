@@ -52,13 +52,13 @@ export const ResultsPage: React.FC = () => {
         childData.gender
       ) :
       // For children 2+ years, use BMI
-      calculateBMIPercentile(
-        calculateBMI(
-          convertWeight(childData.weight, childData.weightUnit, 'kg'),
-          convertHeight(childData.height, childData.heightUnit, 'cm')
-        ),
-        age.ageInMonths,
-        childData.gender
+    calculateBMIPercentile(
+      calculateBMI(
+        convertWeight(childData.weight, childData.weightUnit, 'kg'),
+        convertHeight(childData.height, childData.heightUnit, 'cm')
+      ),
+      age.ageInMonths,
+      childData.gender
       )
     ) : null
   
@@ -581,7 +581,7 @@ export const ResultsPage: React.FC = () => {
                 {age.ageInMonths <= 24 ? (
                   <WeightForLengthChart results={results} />
                 ) : (
-                  <BMChart results={results} />
+                <BMChart results={results} />
                 )}
               </div>
 
@@ -611,12 +611,12 @@ export const ResultsPage: React.FC = () => {
               {/* BMI Analysis - No Data */}
               <div className="result-card">
                 <div className="flex items-center justify-between mb-4">
-                                  <div className="flex items-center space-x-3">
-                  <TrendingUp className="w-6 h-6 text-primary-600" />
+                  <div className="flex items-center space-x-3">
+                    <TrendingUp className="w-6 h-6 text-primary-600" />
                   <h2 className="text-xl font-semibold text-gray-900">
                     {age.ageInMonths <= 24 ? 'Weight-for-Length Analysis' : 'BMI Analysis'}
                   </h2>
-                </div>
+                  </div>
                 </div>
                 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">

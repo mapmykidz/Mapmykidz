@@ -55,7 +55,7 @@ export const HomePage: React.FC = () => {
     },
           {
         icon: Activity,
-        title: 'Growth Assessment',
+        title: 'Growth-for-age',
         description: 'Calculate weight-for-length (0-2 years) and BMI (2-20 years) percentiles',
         color: 'from-primary-500 to-primary-600',
         bgColor: 'bg-primary-100',
