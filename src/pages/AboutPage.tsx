@@ -25,8 +25,8 @@ export const AboutPage: React.FC = () => {
     },
     {
       icon: Activity,
-      title: 'BMI-for-Age Analysis',
-      description: 'Calculate Body Mass Index using WHO BMI-for-age standards (0-2 years) and CDC BMI-for-age charts (2-20 years).',
+      title: 'Growth Assessment',
+      description: 'Calculate weight-for-length (0-2 years) and BMI (2-20 years) using WHO and CDC standards.',
     },
     {
       icon: Shield,
@@ -100,7 +100,7 @@ export const AboutPage: React.FC = () => {
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong>BMI-for-age:</strong> WHO standards (0-2 years) and CDC charts (2-20 years)
+                  <strong>Growth Assessment:</strong> Weight-for-length (0-2 years) and BMI (2-20 years)
                 </div>
               </li>
             </ul>
@@ -189,14 +189,18 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">BMI-for-Age Analysis</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Growth Assessment Analysis</h3>
             <p className="text-gray-600 mb-3">
-              Body Mass Index (BMI) is calculated as weight in kilograms divided by height in meters squared:
+              For children 0-2 years, we use weight-for-length (WFL) measurements. For children 2-20 years, we use Body Mass Index (BMI):
             </p>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div><strong>Formula:</strong> BMI = weight (kg) ÷ height (m)²</div>
+                <div><strong>Weight-for-length (0-2 years):</strong> WHO standards for healthy growth assessment</div>
+              </li>
+              <li className="flex items-start space-x-2">
+                <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div><strong>BMI Formula (2-20 years):</strong> BMI = weight (kg) ÷ height (m)²</div>
               </li>
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>

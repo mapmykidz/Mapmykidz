@@ -6,6 +6,7 @@ import { getWHOWeightData } from '../data/whoData_weight'
 import { getCDCWeightData } from '../data/cdcData_weight'
 import { getWHOBMIData } from '../data/whoData_bmi'
 import { getCDCBMIData } from '../data/cdcData_bmi'
+import { getWHOWeightForLengthData } from '../data/whoData_weightforHeight'
 
 /**
  * Calculate age in years, months, and total months from dates
@@ -442,6 +443,97 @@ export const calculateBMI = (weightKg: number, heightCm: number): number => {
 }
 
 /**
+ * Calculate weight-for-length percentile and z-score using WHO standards (0-2 years)
+ */
+export const calculateWeightForLengthPercentile = (
+  weightKg: number,
+  lengthCm: number,
+  gender: 'male' | 'female'
+): GrowthResult => {
+  // Weight-for-length is only used for children 0-2 years (WHO standards)
+  const standard: GrowthStandard = 'WHO'
+  
+  // Get WHO weight-for-length data
+  const wflData = getWHOWeightForLengthData(gender)
+  
+  // Find the closest length value in the data
+  const interpolated = interpolateWFL(lengthCm, wflData)
+  if (!interpolated) {
+    throw new Error('Unable to calculate weight-for-length percentile: length out of range (45-110 cm)')
+  }
+  
+  const { L, M, S } = interpolated
+  
+  // Calculate z-score using LMS method
+  let zScore: number
+  if (L !== 0) {
+    zScore = (Math.pow(weightKg / M, L) - 1) / (L * S)
+  } else {
+    zScore = Math.log(weightKg / M) / S
+  }
+  
+  // Convert z-score to percentile
+  const percentile = zScoreToPercentile(zScore)
+  
+  // Generate interpretation and advice
+  const interpretation = generateWeightForLengthInterpretation(percentile, zScore)
+  const advice = generateWeightForLengthAdvice(percentile, zScore)
+  const isNormal = percentile >= 3 && percentile <= 97
+  
+  return {
+    percentile: Math.round(percentile * 10) / 10, // Round to 1 decimal place
+    zScore: Math.round(zScore * 100) / 100, // Round to 2 decimal places
+    interpretation,
+    advice,
+    isNormal,
+    standard
+  }
+}
+
+/**
+ * Interpolate weight-for-length LMS values for a given length
+ */
+const interpolateWFL = (lengthCm: number, wflData: any[]): any | null => {
+  if (!wflData || wflData.length === 0) return null
+  
+  // Find the closest length values
+  let lowerIndex = -1
+  let upperIndex = -1
+  
+  for (let i = 0; i < wflData.length; i++) {
+    if (wflData[i].length === lengthCm) {
+      return wflData[i] // Exact match
+    }
+    if (wflData[i].length < lengthCm) {
+      lowerIndex = i
+    } else {
+      upperIndex = i
+      break
+    }
+  }
+  
+  // If length is outside the range
+  if (lowerIndex === -1) {
+    return wflData[0] // Use first value
+  }
+  if (upperIndex === -1) {
+    return wflData[wflData.length - 1] // Use last value
+  }
+  
+  // Interpolate between the two closest values
+  const lower = wflData[lowerIndex]
+  const upper = wflData[upperIndex]
+  const ratio = (lengthCm - lower.length) / (upper.length - lower.length)
+  
+  return {
+    length: lengthCm,
+    L: lower.L + (upper.L - lower.L) * ratio,
+    M: lower.M + (upper.M - lower.M) * ratio,
+    S: lower.S + (upper.S - lower.S) * ratio
+  }
+}
+
+/**
  * Calculate BMI percentile and z-score using WHO or CDC standards
  */
 export const calculateBMIPercentile = (
@@ -488,6 +580,54 @@ export const calculateBMIPercentile = (
     advice,
     isNormal,
     standard
+  }
+}
+
+/**
+ * Generate weight-for-length interpretation based on percentile and z-score
+ */
+const generateWeightForLengthInterpretation = (
+  percentile: number,
+  _zScore: number
+): string => {
+  if (percentile < 3) {
+    return `Your child's weight-for-length is below the 3rd percentile, indicating very low weight for their length. This may require medical evaluation.`
+  } else if (percentile < 10) {
+    return `Your child's weight-for-length is between the 3rd and 10th percentiles, indicating low weight for their length. Consider discussing with your healthcare provider.`
+  } else if (percentile < 25) {
+    return `Your child's weight-for-length is between the 10th and 25th percentiles, indicating below average weight for their length.`
+  } else if (percentile <= 75) {
+    return `Your child's weight-for-length is between the 25th and 75th percentiles, indicating normal weight for their length.`
+  } else if (percentile <= 90) {
+    return `Your child's weight-for-length is between the 75th and 90th percentiles, indicating above average weight for their length.`
+  } else if (percentile <= 97) {
+    return `Your child's weight-for-length is between the 90th and 97th percentiles, indicating elevated weight for their length. Continue monitoring growth patterns and discuss with your healthcare provider if concerns arise.`
+  } else {
+    return `Your child's weight-for-length is above the 97th percentile, indicating very high weight for their length. This may require medical evaluation.`
+  }
+}
+
+/**
+ * Generate weight-for-length advice based on percentile and z-score
+ */
+const generateWeightForLengthAdvice = (
+  percentile: number,
+  _zScore: number
+): string => {
+  if (percentile < 3) {
+    return `Consult with your healthcare provider immediately. Very low weight-for-length may indicate underlying health issues or nutritional concerns that need medical attention.`
+  } else if (percentile < 10) {
+    return `Schedule a visit with your healthcare provider to discuss your child's weight-for-length. They can help identify potential causes and develop a plan for healthy weight gain.`
+  } else if (percentile < 25) {
+    return `Monitor your child's weight-for-length regularly. Ensure they are eating a balanced diet with adequate calories and nutrients. Consider consulting with a pediatrician if concerns persist.`
+  } else if (percentile <= 75) {
+    return `Your child's weight-for-length is within the normal range. Continue providing a balanced diet and age-appropriate physical activity to maintain healthy growth.`
+  } else if (percentile <= 90) {
+    return `Your child's weight-for-length is above average but still within a healthy range. Focus on balanced nutrition and age-appropriate physical activity.`
+  } else if (percentile <= 97) {
+    return `Continue monitoring your child's growth patterns. Ensure balanced nutrition and age-appropriate physical activity. Discuss with your healthcare provider if this pattern continues or if you have concerns.`
+  } else {
+    return `Consult with your healthcare provider immediately. Very high weight-for-length may indicate health concerns that need medical evaluation and intervention.`
   }
 }
 

@@ -94,9 +94,9 @@ export const InputPage: React.FC = () => {
         if (data.selectedMeasurements?.includes('height')) {
         if (!data.height || data.height <= 0) {
           newErrors.height = 'Please enter a valid height'
-        } else {
-          const minHeight = data.heightUnit === 'cm' ? 30 : 12 // 30cm or 12 inches
-          const maxHeight = data.heightUnit === 'cm' ? 220 : 87 // 220cm or 87 inches
+                  } else {
+            const minHeight = data.heightUnit === 'cm' ? 30 : 12 // 30cm or 12 inches
+            const maxHeight = data.heightUnit === 'cm' ? 220 : 87 // 220cm or 87 inches
           if (data.height < minHeight || data.height > maxHeight) {
             newErrors.height = `Height must be between ${minHeight} and ${maxHeight} ${data.heightUnit}`
             }
@@ -107,9 +107,9 @@ export const InputPage: React.FC = () => {
         if (data.selectedMeasurements?.includes('weight')) {
           if (!data.weight || data.weight <= 0) {
             newErrors.weight = 'Please enter a valid weight'
-          } else {
-            const minWeight = data.weightUnit === 'kg' ? 1.5 : 3.3 // reasonable lower bounds
-            const maxWeight = data.weightUnit === 'kg' ? 200 : 440
+                      } else {
+              const minWeight = data.weightUnit === 'kg' ? 1.5 : 3.3 // 1.5kg or 3.3 lbs
+              const maxWeight = data.weightUnit === 'kg' ? 200 : 440
             if (data.weight < minWeight || data.weight > maxWeight) {
               newErrors.weight = `Weight must be between ${minWeight} and ${maxWeight} ${data.weightUnit}`
             }
@@ -204,9 +204,9 @@ export const InputPage: React.FC = () => {
     if (data.selectedMeasurements?.includes('height')) {
       if (!data.height || data.height <= 0) {
         newErrors.height = 'Please enter a valid height'
-      } else {
-        const minHeight = data.heightUnit === 'cm' ? 30 : 12
-        const maxHeight = data.heightUnit === 'cm' ? 220 : 87
+              } else {
+          const minHeight = data.heightUnit === 'cm' ? 30 : 12 // 30cm or 12 inches
+          const maxHeight = data.heightUnit === 'cm' ? 220 : 87 // 220cm or 87 inches
         if (data.height < minHeight || data.height > maxHeight) {
           newErrors.height = `Height must be between ${minHeight} and ${maxHeight} ${data.heightUnit}`
         }
@@ -217,9 +217,9 @@ export const InputPage: React.FC = () => {
     if (data.selectedMeasurements?.includes('weight')) {
       if (!data.weight || data.weight <= 0) {
         newErrors.weight = 'Please enter a valid weight'
-      } else {
-        const minWeight = data.weightUnit === 'kg' ? 1.5 : 3.3
-        const maxWeight = data.weightUnit === 'kg' ? 200 : 440
+              } else {
+          const minWeight = data.weightUnit === 'kg' ? 1.5 : 3.3 // 1.5kg or 3.3 lbs
+          const maxWeight = data.weightUnit === 'kg' ? 200 : 440
         if (data.weight < minWeight || data.weight > maxWeight) {
           newErrors.weight = `Weight must be between ${minWeight} and ${maxWeight} ${data.weightUnit}`
         }
@@ -390,11 +390,11 @@ export const InputPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Activity className={`w-5 h-5 ${selectedMeasurements.includes('bmi') ? 'text-primary-600' : 'text-gray-600'}`} />
-                  <div className="font-medium">BMI</div>
+                  <div className="font-medium">Growth Assessment</div>
                 </div>
                 {selectedMeasurements.includes('bmi') && <CheckCircle2 className="w-5 h-5 text-primary-600" />}
               </div>
-              <p className="text-sm text-gray-600 mt-2">Assess body composition and healthy weight relative to height.</p>
+              <p className="text-sm text-gray-600 mt-2">Assess body composition and healthy weight relative to height</p>
               {selectedMeasurements.includes('bmi') && (
                 <p className="text-xs text-primary-700 mt-1">Height and Weight auto-selected.</p>
               )}

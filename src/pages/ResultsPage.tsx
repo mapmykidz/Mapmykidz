@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BarChart3, ArrowLeft, Calculator, TrendingUp, Users, AlertTriangle, CheckCircle, Info, Download, Ruler, Scale, Activity } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
-import { convertHeight, convertWeight, calculateWeightPercentile, calculateBMI, calculateBMIPercentile } from '../utils/calculations'
+import { convertHeight, convertWeight, calculateWeightPercentile, calculateBMI, calculateBMIPercentile, calculateWeightForLengthPercentile } from '../utils/calculations'
 import { GrowthChart } from '../components/GrowthChart'
 import { WeightChart } from '../components/WeightChart'
 import { BMChart } from '../components/BMChart'
+import { WeightForLengthChart } from '../components/WeightForLengthChart'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
@@ -41,15 +42,24 @@ export const ResultsPage: React.FC = () => {
       childData.gender
     ) : null
 
-  // Calculate BMI results if both weight and height are provided
+  // Calculate BMI or weight-for-length results if both weight and height are provided
   const bmiResult = childData.weight && childData.weightUnit && childData.height && childData.heightUnit ? 
-    calculateBMIPercentile(
-      calculateBMI(
+    (age.ageInMonths <= 24 ? 
+      // For children 0-2 years, use weight-for-length
+      calculateWeightForLengthPercentile(
         convertWeight(childData.weight, childData.weightUnit, 'kg'),
-        convertHeight(childData.height, childData.heightUnit, 'cm')
-      ),
-      age.ageInMonths,
-      childData.gender
+        convertHeight(childData.height, childData.heightUnit, 'cm'),
+        childData.gender
+      ) :
+      // For children 2+ years, use BMI
+      calculateBMIPercentile(
+        calculateBMI(
+          convertWeight(childData.weight, childData.weightUnit, 'kg'),
+          convertHeight(childData.height, childData.heightUnit, 'cm')
+        ),
+        age.ageInMonths,
+        childData.gender
+      )
     ) : null
   
   // Get selected measurements from child data
@@ -307,7 +317,9 @@ export const ResultsPage: React.FC = () => {
                 {tab === 'height' && <Ruler className="w-4 h-4" />}
                 {tab === 'weight' && <Scale className="w-4 h-4" />}
                 {tab === 'bmi' && <Activity className="w-4 h-4" />}
-                <span className={tab === 'bmi' ? 'uppercase' : 'capitalize'}>{tab}</span>
+                <span className={tab === 'bmi' && age.ageInMonths <= 24 ? 'normal-case' : (tab === 'bmi' ? 'uppercase' : 'capitalize')}>
+                  {tab === 'bmi' && age.ageInMonths <= 24 ? 'Weight-for-Length' : tab}
+                </span>
               </button>
             ))}
           </div>
@@ -516,7 +528,9 @@ export const ResultsPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">BMI Analysis</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {age.ageInMonths <= 24 ? 'Weight-for-Length Analysis' : 'BMI Analysis'}
+                    </h2>
                   </div>
                   {getPercentileIcon(bmiResult.isNormal)}
                 </div>
@@ -556,20 +570,28 @@ export const ResultsPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* BMI Chart */}
+              {/* BMI or Weight-for-Length Chart */}
               <div className="card">
                 <div className="flex items-center space-x-3 mb-6">
                   <BarChart3 className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-xl font-semibold text-gray-900">BMI Growth Chart</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {age.ageInMonths <= 24 ? 'Weight-for-Length Growth Chart' : 'BMI Growth Chart'}
+                  </h2>
                 </div>
-                <BMChart results={results} />
+                {age.ageInMonths <= 24 ? (
+                  <WeightForLengthChart results={results} />
+                ) : (
+                  <BMChart results={results} />
+                )}
               </div>
 
               {/* BMI Advice Section */}
               <div className="card">
                 <div className="flex items-center space-x-3 mb-4">
                   <Info className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-xl font-semibold text-gray-900">BMI Recommendations</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {age.ageInMonths <= 24 ? 'Weight-for-Length Recommendations' : 'BMI Recommendations'}
+                  </h2>
                 </div>
                 <div className={`p-4 rounded-lg border-l-4 ${
                   bmiResult.isNormal 
@@ -589,18 +611,22 @@ export const ResultsPage: React.FC = () => {
               {/* BMI Analysis - No Data */}
               <div className="result-card">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">BMI Analysis</h2>
-                  </div>
+                                  <div className="flex items-center space-x-3">
+                  <TrendingUp className="w-6 h-6 text-primary-600" />
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {age.ageInMonths <= 24 ? 'Weight-for-Length Analysis' : 'BMI Analysis'}
+                  </h2>
+                </div>
                 </div>
                 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                   <div className="text-blue-800">
                     <Activity className="w-12 h-12 mx-auto mb-4 text-blue-600" />
-                    <h3 className="text-lg font-semibold mb-2">BMI Data Required</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {age.ageInMonths <= 24 ? 'Weight-for-Length Data Required' : 'BMI Data Required'}
+                    </h3>
                     <p className="text-sm">
-                      Please provide both height and weight information to view BMI analysis.
+                      Please provide both height and weight information to view {age.ageInMonths <= 24 ? 'weight-for-length' : 'BMI'} analysis.
                     </p>
                   </div>
                 </div>
@@ -610,14 +636,18 @@ export const ResultsPage: React.FC = () => {
               <div className="card">
                 <div className="flex items-center space-x-3 mb-6">
                   <BarChart3 className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-xl font-semibold text-gray-900">BMI Growth Chart</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {age.ageInMonths <= 24 ? 'Weight-for-Length Growth Chart' : 'BMI Growth Chart'}
+                  </h2>
                 </div>
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
                   <div className="text-gray-600">
                     <BarChart3 className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                    <h3 className="text-lg font-semibold mb-2">BMI Data Required</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {age.ageInMonths <= 24 ? 'Weight-for-Length Data Required' : 'BMI Data Required'}
+                    </h3>
                     <p className="text-sm">
-                      Please provide both height and weight information to view BMI growth chart.
+                      Please provide both height and weight information to view {age.ageInMonths <= 24 ? 'weight-for-length' : 'BMI'} growth chart.
                     </p>
                   </div>
                 </div>

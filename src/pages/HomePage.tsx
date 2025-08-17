@@ -12,7 +12,7 @@ export const HomePage: React.FC = () => {
     {
       icon: TrendingUp,
       title: 'Comprehensive Tracking',
-      description: 'Track Height, Weight, and BMI individually or together with interactive growth charts'
+      description: 'Track Height, Weight, and Growth percentiles individually or together with interactive growth charts'
     },
     {
       icon: Shield,
@@ -53,12 +53,12 @@ export const HomePage: React.FC = () => {
       bgColor: 'bg-primary-100',
       iconColor: 'text-primary-600'
     },
-    {
-      icon: Activity,
-      title: 'BMI-for-Age',
-      description: 'Calculate BMI-for-age percentiles for healthy growth assessment',
-      color: 'from-primary-500 to-primary-600',
-      bgColor: 'bg-primary-100',
+          {
+        icon: Activity,
+        title: 'Growth Assessment',
+        description: 'Calculate weight-for-length (0-2 years) and BMI (2-20 years) percentiles',
+        color: 'from-primary-500 to-primary-600',
+        bgColor: 'bg-primary-100',
       iconColor: 'text-primary-600'
     }
   ]
@@ -75,7 +75,7 @@ export const HomePage: React.FC = () => {
             Complete Child Growth Tracker
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-            Track height, weight, and BMI percentiles using WHO (0-2 years) and CDC (2-20 years) standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
+            Track height, weight, and growth percentiles using WHO (0-2 years) and CDC (2-20 years) standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
