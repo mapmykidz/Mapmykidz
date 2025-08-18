@@ -390,7 +390,7 @@ export const InputPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Activity className={`w-5 h-5 ${selectedMeasurements.includes('bmi') ? 'text-primary-600' : 'text-gray-600'}`} />
-                  <div className="font-medium">Growth</div>
+                  <div className="font-medium">Nutrition</div>
                 </div>
                 {selectedMeasurements.includes('bmi') && <CheckCircle2 className="w-5 h-5 text-primary-600" />}
               </div>
