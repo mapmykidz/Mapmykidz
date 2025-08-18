@@ -319,8 +319,9 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
     thrLevel2Max = mph + 8.5
   }
   
-  // Calculate Z-scores for mid-parental height values using current child's age standards
-  // This shows how the expected adult height compares to current age standards
+  // Calculate Z-scores for mid-parental height values using adult height standards
+  // For mid-parental height, we use adult height standards (age 18-20)
+  const adultAgeMonths = 18 * 12 // 18 years = 216 months
   const standard = ageInMonths <= 24 ? 'WHO' : 'CDC'
   
   let lmsData: LMSData[]
@@ -330,13 +331,13 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
     lmsData = getCDCData(childData.gender)
   }
   
-  // Get LMS values for the child's current age
-  const currentLMS = interpolateLMS(ageInMonths, lmsData)
-  if (!currentLMS) {
-    throw new Error('Unable to calculate Z-scores: height data not available for current age')
+  // Get LMS values for adult age (18 years)
+  const adultLMS = interpolateLMS(adultAgeMonths, lmsData)
+  if (!adultLMS) {
+    throw new Error('Unable to calculate Z-scores: adult height data not available')
   }
   
-  const { L, M, S } = currentLMS
+  const { L, M, S } = adultLMS
   
   // Calculate Z-scores for all mid-parental height values
   const mphZScore = calculateZScore(mph, L, M, S)
