@@ -356,17 +356,15 @@ export const ResultsPage: React.FC = () => {
                 </div>
               </div>
               
-              {growthResult.percentile < 3 && (
-                <div className="bg-white rounded-lg p-4 border border-primary-200">
-                  <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                  <div className="text-3xl font-bold text-gray-900">
-                    {growthResult.zScore.toFixed(2)}
-                  </div>
-                  <div className="text-sm text-gray-500 mt-1">
-                    Standard deviations
-                  </div>
+              <div className="bg-white rounded-lg p-4 border border-primary-200">
+                <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                <div className="text-3xl font-bold text-gray-900">
+                  {growthResult.zScore.toFixed(2)}
                 </div>
-              )}
+                <div className="text-sm text-gray-500 mt-1">
+                  Standard deviations
+                </div>
+              </div>
             </div>
 
             <div className="bg-white rounded-lg p-4 border border-primary-200">
@@ -431,17 +429,15 @@ export const ResultsPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  {weightResult.percentile < 3 && (
-                    <div className="bg-white rounded-lg p-4 border border-primary-200">
-                      <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                      <div className="text-3xl font-bold text-gray-900">
-                        {weightResult.zScore.toFixed(2)}
-                      </div>
-                      <div className="text-sm text-gray-500 mt-1">
-                        Standard deviations
-                      </div>
+                  <div className="bg-white rounded-lg p-4 border border-primary-200">
+                    <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                    <div className="text-3xl font-bold text-gray-900">
+                      {weightResult.zScore.toFixed(2)}
                     </div>
-                  )}
+                    <div className="text-sm text-gray-500 mt-1">
+                      Standard deviations
+                    </div>
+                  </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4 border border-primary-200">
@@ -549,17 +545,15 @@ export const ResultsPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  {bmiResult.percentile < 3 && (
-                    <div className="bg-white rounded-lg p-4 border border-primary-200">
-                      <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                      <div className="text-3xl font-bold text-gray-900">
-                        {bmiResult.zScore.toFixed(2)}
-                      </div>
-                      <div className="text-sm text-gray-500 mt-1">
-                        Standard deviations
-                      </div>
+                  <div className="bg-white rounded-lg p-4 border border-primary-200">
+                    <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                    <div className="text-3xl font-bold text-gray-900">
+                      {bmiResult.zScore.toFixed(2)}
                     </div>
-                  )}
+                    <div className="text-sm text-gray-500 mt-1">
+                      Standard deviations
+                    </div>
+                  </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4 border border-primary-200">
@@ -717,6 +711,9 @@ export const ResultsPage: React.FC = () => {
                 <div className="text-sm text-gray-500">
                   ({convertHeight(midParentalHeight.mph, 'cm', 'inches').toFixed(1)} inches)
                 </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  Z-score: {midParentalHeight.mphZScore.toFixed(2)}
+                </div>
               </div>
 
               <div className="space-y-3">
@@ -725,11 +722,17 @@ export const ResultsPage: React.FC = () => {
                   <div className="text-sm text-gray-600">
                     {midParentalHeight.thrLevel1Min.toFixed(1)} - {midParentalHeight.thrLevel1Max.toFixed(1)} cm
                   </div>
+                  <div className="text-xs text-gray-500">
+                    Z-scores: {midParentalHeight.thrLevel1MinZScore.toFixed(2)} to {midParentalHeight.thrLevel1MaxZScore.toFixed(2)}
+                  </div>
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-1">Target Range (Level 2)</div>
                   <div className="text-sm text-gray-600">
                     {midParentalHeight.thrLevel2Min.toFixed(1)} - {midParentalHeight.thrLevel2Max.toFixed(1)} cm
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Z-scores: {midParentalHeight.thrLevel2MinZScore.toFixed(2)} to {midParentalHeight.thrLevel2MaxZScore.toFixed(2)}
                   </div>
                 </div>
               </div>

@@ -271,7 +271,7 @@ export const InputPage: React.FC = () => {
       const completeChildData = childData as ChildData
       const age = calculateAge(completeChildData.dateOfBirth, completeChildData.measurementDate)
       const growthResult = calculateGrowthResult(completeChildData, age)
-      const midParentalHeight = calculateMidParentalHeight(completeChildData)
+      const midParentalHeight = calculateMidParentalHeight(completeChildData, age.ageInMonths)
 
       const results = {
         childData: completeChildData,
