@@ -700,8 +700,8 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Mid-Parental Height - Only show for height-related measurements */}
-          {(activeTab === 'height' || activeTab === 'bmi') && (
+          {/* Mid-Parental Height - Only show for height tab */}
+          {activeTab === 'height' && (
           <div className="card">
             <div className="flex items-center space-x-3 mb-4">
               <Users className="w-5 h-5 text-primary-600" />
