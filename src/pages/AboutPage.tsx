@@ -46,7 +46,7 @@ export const AboutPage: React.FC = () => {
           About MapMyKidz
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          A professional-grade growth tracking tool that helps parents monitor their child's height, weight, and BMI 
+          A professional-grade growth tracking tool that helps parents monitor their child's height, weight, and body composition 
           using internationally recognized medical standards from WHO and CDC.
         </p>
       </div>

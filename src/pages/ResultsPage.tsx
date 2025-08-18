@@ -337,7 +337,7 @@ export const ResultsPage: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">Height Growth Percentile</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">Height-for-age Percentile</h2>
               </div>
               {getPercentileIcon(growthResult.isNormal)}
             </div>
@@ -412,7 +412,7 @@ export const ResultsPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">Weight Growth Percentile</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">Weight-for-age Percentile</h2>
                   </div>
                   {getPercentileIcon(weightResult.isNormal)}
                 </div>
@@ -487,7 +487,7 @@ export const ResultsPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">Weight Growth Percentile</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">Weight-for-age Percentile</h2>
                   </div>
                 </div>
                 
