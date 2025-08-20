@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Home, Calculator, BarChart3, Info, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { SEO, getDefaultSEOProps } from './SEO'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -10,6 +11,9 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  
+  // Get SEO props for current page
+  const seoProps = getDefaultSEOProps(location.pathname)
 
   const navigation = [
     { name: 'Home', href: '/', icon: Home },
@@ -21,7 +25,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isActive = (path: string) => location.pathname === path
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <SEO {...seoProps} />
+      <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,5 +134,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </footer>
     </div>
+    </>
   )
 }
