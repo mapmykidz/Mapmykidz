@@ -119,6 +119,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span>•</span>
               <span>CDC Growth Charts (2-20 years)</span>
             </div>
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-xs text-gray-400">
+                © 2024 MapMyKidz. All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       </footer>

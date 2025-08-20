@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BarChart3, ArrowLeft, Calculator, TrendingUp, Users, AlertTriangle, CheckCircle, Info, Download, Ruler, Scale, Activity } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
-import { convertHeight, convertWeight, calculateWeightPercentile, calculateBMI, calculateBMIPercentile, calculateWeightForLengthPercentile } from '../utils/calculations'
+import { convertHeight, convertWeight, calculateWeightPercentile, calculateBMI, calculateBMIPercentile, calculateWeightForLengthPercentile, interpolateLMS } from '../utils/calculations'
+import { getCDCData } from '../data/cdcData_height'
 import { GrowthChart } from '../components/GrowthChart'
 import { WeightChart } from '../components/WeightChart'
 import { BMChart } from '../components/BMChart'
@@ -62,6 +63,83 @@ export const ResultsPage: React.FC = () => {
       )
     ) : null
   
+  // Function to get MPH-based height recommendation for children 2+ years
+  const getMPHHeightRecommendation = () => {
+    // Only for children 2+ years (CDC standards) where MPH is applicable
+    if (age.ageInMonths <= 24 || !midParentalHeight) {
+      return null
+    }
+
+    const childHeightCm = convertHeight(childData.height, childData.heightUnit, 'cm')
+    
+    // Calculate MPH at current age using the same method as the chart
+    // Get CDC data for the child's gender
+    const cdcData = getCDCData(childData.gender)
+    
+    // Get LMS values for the child's current age
+    const lmsData = interpolateLMS(age.ageInMonths, cdcData)
+    if (!lmsData) {
+      return null
+    }
+    
+    const { L, M, S } = lmsData
+    const mphZScore = midParentalHeight.mphZScore
+    
+    // Calculate MPH height at current age using the MPH Z-score (same as chart)
+    // Note: mphAtCurrentAge is calculated but not used directly in this function
+    // as we're comparing against the target ranges directly
+    
+    // Calculate Level 1 target range (MPH ± 1 SD)
+    const level1MinZScore = mphZScore - 1
+    const level1MaxZScore = mphZScore + 1
+    
+    let level1Min: number, level1Max: number
+    if (L !== 0) {
+      level1Min = M * Math.pow(1 + L * S * level1MinZScore, 1 / L)
+      level1Max = M * Math.pow(1 + L * S * level1MaxZScore, 1 / L)
+    } else {
+      level1Min = M * Math.exp(S * level1MinZScore)
+      level1Max = M * Math.exp(S * level1MaxZScore)
+    }
+    
+    // Calculate Level 2 target range (MPH ± 2 SD)
+    const level2MinZScore = mphZScore - 2
+    const level2MaxZScore = mphZScore + 2
+    
+    let level2Min: number, level2Max: number
+    if (L !== 0) {
+      level2Min = M * Math.pow(1 + L * S * level2MinZScore, 1 / L)
+      level2Max = M * Math.pow(1 + L * S * level2MaxZScore, 1 / L)
+    } else {
+      level2Min = M * Math.exp(S * level2MinZScore)
+      level2Max = M * Math.exp(S * level2MaxZScore)
+    }
+    
+    // Calculate if child's height is within age-appropriate target ranges
+    const isWithinLevel1 = childHeightCm >= level1Min && childHeightCm <= level1Max
+    const isWithinLevel2 = childHeightCm >= level2Min && childHeightCm <= level2Max
+
+    if (isWithinLevel1) {
+      return {
+        message: "Your child's height is within the level 1 target range - normal.",
+        color: 'bg-green-50 border-green-400',
+        textColor: 'text-green-800'
+      }
+    } else if (isWithinLevel2) {
+      return {
+        message: "Your child's height is within the level 2 target range - needs closer monitoring.", 
+        color: 'bg-orange-50 border-orange-400',
+        textColor: 'text-orange-800'
+      }
+    } else {
+      return {
+        message: "Your child's height is outside of level 2 target height range - recommended to see a pediatrician or pediatric endocrinologist.",
+        color: 'bg-red-50 border-red-400', 
+        textColor: 'text-red-800'
+      }
+    }
+  }
+
   // Get selected measurements from child data
   const selectedMeasurements = childData.selectedMeasurements || ['height']
   
@@ -399,6 +477,18 @@ export const ResultsPage: React.FC = () => {
                 {growthResult.advice}
               </p>
             </div>
+            
+            {/* MPH-based Height Recommendation for children 2+ years */}
+            {getMPHHeightRecommendation() && (
+              <div className={`p-4 rounded-lg border-l-4 mt-4 ${getMPHHeightRecommendation()?.color}`}>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Genetic Potential Assessment</h4>
+                  <p className={`${getMPHHeightRecommendation()?.textColor}`}>
+                    {getMPHHeightRecommendation()?.message}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
             </>
           )}
