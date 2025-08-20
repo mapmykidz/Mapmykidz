@@ -127,7 +127,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-xs text-gray-400">
-                © 2024 MapMyKidz. All rights reserved.
+                © 2025 MapMyKidz. All rights reserved.
               </p>
             </div>
           </div>
