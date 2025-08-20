@@ -139,7 +139,7 @@ export const ResultsPage: React.FC = () => {
       }
     }
   }
-
+  
   // Get selected measurements from child data
   const selectedMeasurements = childData.selectedMeasurements || ['height']
   
@@ -434,15 +434,15 @@ export const ResultsPage: React.FC = () => {
                 </div>
               </div>
               
-              <div className="bg-white rounded-lg p-4 border border-primary-200">
-                <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                <div className="text-3xl font-bold text-gray-900">
-                  {growthResult.zScore.toFixed(2)}
+                <div className="bg-white rounded-lg p-4 border border-primary-200">
+                  <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                  <div className="text-3xl font-bold text-gray-900">
+                    {growthResult.zScore.toFixed(2)}
+                  </div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    Standard deviations
+                  </div>
                 </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  Standard deviations
-                </div>
-              </div>
             </div>
 
             <div className="bg-white rounded-lg p-4 border border-primary-200">
@@ -519,15 +519,15 @@ export const ResultsPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-white rounded-lg p-4 border border-primary-200">
-                    <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                    <div className="text-3xl font-bold text-gray-900">
-                      {weightResult.zScore.toFixed(2)}
+                    <div className="bg-white rounded-lg p-4 border border-primary-200">
+                      <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                      <div className="text-3xl font-bold text-gray-900">
+                        {weightResult.zScore.toFixed(2)}
+                      </div>
+                      <div className="text-sm text-gray-500 mt-1">
+                        Standard deviations
+                      </div>
                     </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      Standard deviations
-                    </div>
-                  </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4 border border-primary-200">
@@ -635,15 +635,15 @@ export const ResultsPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-white rounded-lg p-4 border border-primary-200">
-                    <div className="text-sm text-gray-600 mb-1">Z-Score</div>
-                    <div className="text-3xl font-bold text-gray-900">
-                      {bmiResult.zScore.toFixed(2)}
+                    <div className="bg-white rounded-lg p-4 border border-primary-200">
+                      <div className="text-sm text-gray-600 mb-1">Z-Score</div>
+                      <div className="text-3xl font-bold text-gray-900">
+                        {bmiResult.zScore.toFixed(2)}
+                      </div>
+                      <div className="text-sm text-gray-500 mt-1">
+                        Standard deviations
+                      </div>
                     </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      Standard deviations
-                    </div>
-                  </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4 border border-primary-200">

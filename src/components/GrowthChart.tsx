@@ -220,8 +220,8 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
       }
     ]
 
-    // MPH Target Zones (only for 2-20 years)
-    const mphZones = age.ageInMonths > 24 ? [
+    // MPH Target Zones (only for 2-20 years and genetic view)
+    const mphZones = age.ageInMonths > 24 && chartView === 'genetic' ? [
       // Red Zone (beyond L2)
       {
         label: 'Alert Zone (beyond L2)',
@@ -456,6 +456,19 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
               'Caution Zone (L1 to L2) min', 
               'Optimal Zone (L1 range) max'
             ]
+            // Hide zone-related legend items in standard view
+            if (chartView === 'standard') {
+              const zoneLabels = [
+                'Alert Zone (beyond L2)',
+                'Alert Zone (beyond L2) min',
+                'Caution Zone (L1 to L2)',
+                'Caution Zone (L1 to L2) min',
+                'Optimal Zone (L1 range)',
+                'Optimal Zone (L1 range) max',
+                'Mid-parental height'
+              ]
+              return !zoneLabels.includes(legendItem.text || '')
+            }
             return !hiddenLabels.includes(legendItem.text || '')
           }
         }
@@ -558,7 +571,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
             {chartView === 'standard' && ' Percentile lines show the distribution of heights for children of the same age and gender.'}
             {chartView === 'genetic' && ' The 50th percentile line shows average growth, while the MPH zones show your child\'s genetic potential.'}
         </p>
-        {age.ageInMonths > 24 && (
+        {age.ageInMonths > 24 && chartView === 'genetic' && (
           <div className="space-y-1">
             <p>
               The <strong>dashed black line</strong> shows the mid-parental height growth curve based on your child's genetic potential.
