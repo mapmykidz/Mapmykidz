@@ -141,10 +141,12 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
           mphLine = M * Math.exp(S * mphZScore)
         }
 
-        // Calculate Level 1 target range (MPH ± 1 SD)
-        const level1ZScore = mphZScore
-        const level1MinZScore = level1ZScore - 1
-        const level1MaxZScore = level1ZScore + 1
+        // Following the image specification: "Use same SDS score at all age points from 2 until 20 years"
+        // Use the pre-calculated Z-scores from MPH calculation (based on 20-year-old standards)
+        const level1MinZScore = midParentalHeight.thrLevel1MinZScore
+        const level1MaxZScore = midParentalHeight.thrLevel1MaxZScore
+        const level2MinZScore = midParentalHeight.thrLevel2MinZScore
+        const level2MaxZScore = midParentalHeight.thrLevel2MaxZScore
 
         if (L !== 0) {
           thrLevel1Min = M * Math.pow(1 + L * S * level1MinZScore, 1 / L)
@@ -154,9 +156,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
           thrLevel1Max = M * Math.exp(S * level1MaxZScore)
         }
 
-        // Calculate Level 2 target range (MPH ± 2 SD)
-        const level2MinZScore = level1ZScore - 2
-        const level2MaxZScore = level1ZScore + 2
+        // Calculate Level 2 target range using the same Z-scores throughout
 
         if (L !== 0) {
           thrLevel2Min = M * Math.pow(1 + L * S * level2MinZScore, 1 / L)

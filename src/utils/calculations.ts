@@ -319,9 +319,9 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
     thrLevel2Max = mph + 8.5
   }
   
-  // Calculate Z-scores for mid-parental height values using adult height standards
-  // For mid-parental height, we use adult height standards (age 18-20)
-  const adultAgeMonths = 18 * 12 // 18 years = 216 months
+  // Calculate Z-scores for mid-parental height values using 20-year-old standards
+  // Following the image specification: "Calculate SDS scoring for MPH + THR based on 20y old boy/girl"
+  const adultAgeMonths = 20 * 12 // 20 years = 240 months
   const standard = ageInMonths <= 24 ? 'WHO' : 'CDC'
   
   let lmsData: LMSData[]
