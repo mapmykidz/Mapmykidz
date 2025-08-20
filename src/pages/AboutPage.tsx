@@ -246,6 +246,29 @@ export const AboutPage: React.FC = () => {
                 </div>
               </div>
             </div>
+            
+            <div className="mt-6">
+              <h4 className="text-md font-semibold text-gray-900 mb-3">Mid-Parental Height (MPH) Target Ranges (2-20 years)</h4>
+              <p className="text-gray-600 mb-3">
+                For children 2 years and older, we calculate target height ranges based on your child's genetic potential (mid-parental height):
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <div className="font-medium text-gray-900 mb-1">Level 1 Target Range</div>
+                    <div className="text-gray-600">Your child's height is within the level 1 target range - normal.</div>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 mb-1">Level 2 Target Range</div>
+                    <div className="text-gray-600">Your child's height is within the level 2 target range - needs closer monitoring.</div>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 mb-1">Outside Level 2 Range</div>
+                    <div className="text-gray-600">Your child's height is outside of level 2 target height range - recommended to see a pediatrician or pediatric endocrinologist.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>

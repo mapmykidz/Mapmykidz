@@ -309,7 +309,7 @@ export const WeightChart: React.FC<WeightChartProps> = ({ results }) => {
 
   return (
     <div className="w-full">
-      <div className="h-96 md:h-[500px]">
+      <div className="h-[450px] sm:h-[500px] md:h-[550px] lg:h-[500px]">
         <Line data={chartDatasets} options={options} />
       </div>
       
