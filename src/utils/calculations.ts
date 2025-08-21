@@ -331,7 +331,7 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
     lmsData = getCDCData(childData.gender)
   }
   
-  // Get LMS values for adult age (18 years)
+  // Get LMS values for adult age (20 years)
   const adultLMS = interpolateLMS(adultAgeMonths, lmsData)
   if (!adultLMS) {
     throw new Error('Unable to calculate Z-scores: adult height data not available')
