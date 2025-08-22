@@ -127,8 +127,6 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
       let mphLine: number | undefined
       let thrLevel1Min: number | undefined
       let thrLevel1Max: number | undefined
-      let thrLevel2Min: number | undefined
-      let thrLevel2Max: number | undefined
 
       if (usingCDC && ageMonths >= 24) {
         // Calculate MPH growth curve using the MPH Z-score applied to each age point
@@ -145,8 +143,6 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
         // Use the pre-calculated Z-scores from MPH calculation (based on 20-year-old standards)
         const level1MinZScore = midParentalHeight.thrLevel1MinZScore
         const level1MaxZScore = midParentalHeight.thrLevel1MaxZScore
-        const level2MinZScore = midParentalHeight.thrLevel2MinZScore
-        const level2MaxZScore = midParentalHeight.thrLevel2MaxZScore
 
         if (L !== 0) {
           thrLevel1Min = M * Math.pow(1 + L * S * level1MinZScore, 1 / L)
@@ -154,16 +150,6 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
         } else {
           thrLevel1Min = M * Math.exp(S * level1MinZScore)
           thrLevel1Max = M * Math.exp(S * level1MaxZScore)
-        }
-
-        // Calculate Level 2 target range using the same Z-scores throughout
-
-        if (L !== 0) {
-          thrLevel2Min = M * Math.pow(1 + L * S * level2MinZScore, 1 / L)
-          thrLevel2Max = M * Math.pow(1 + L * S * level2MaxZScore, 1 / L)
-        } else {
-          thrLevel2Min = M * Math.exp(S * level2MinZScore)
-          thrLevel2Max = M * Math.exp(S * level2MaxZScore)
         }
       }
       
@@ -178,9 +164,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
         percentile97: calculateHeightForPercentile(97),
         mphLine,
         thrLevel1Min,
-        thrLevel1Max,
-        thrLevel2Min,
-        thrLevel2Max
+        thrLevel1Max
       }
       
       data.push(point)
@@ -222,57 +206,33 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
 
     // MPH Target Zones (only for 2-20 years and genetic view)
     const mphZones = age.ageInMonths > 24 && chartView === 'genetic' ? [
-      // Red Zone (beyond L2)
+      // Red Zone (beyond Target Range) - Separate legend entries
       {
-        label: 'Alert Zone (beyond L2)',
-        data: chartData.map(point => point.thrLevel2Max).filter(Boolean),
-        borderColor: 'rgba(239, 68, 68, 0.3)',
-        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-        borderWidth: 1,
-        borderDash: [2, 2],
-        pointRadius: 0,
-        fill: '+1',
-        spanGaps: false,
-        order: 1,
-      },
-      {
-        label: 'Alert Zone (beyond L2) min',
-        data: chartData.map(point => point.thrLevel2Min).filter(Boolean),
-        borderColor: 'rgba(239, 68, 68, 0.3)',
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderDash: [2, 2],
-        pointRadius: 0,
-        spanGaps: false,
-        order: 1,
-      },
-      // Orange Zone (L1 to L2)
-      {
-        label: 'Caution Zone (L1 to L2)',
+        label: 'Alert Zone (Above)',
         data: chartData.map(point => point.thrLevel1Max).filter(Boolean),
-        borderColor: 'rgba(245, 158, 11, 0.4)',
-        backgroundColor: 'rgba(245, 158, 11, 0.15)',
-        borderWidth: 1,
-        borderDash: [3, 3],
+        borderColor: '#dc2626',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderDash: [5, 5],
         pointRadius: 0,
         fill: '+1',
         spanGaps: false,
-        order: 2,
+        order: 1,
       },
       {
-        label: 'Caution Zone (L1 to L2) min',
+        label: 'Alert Zone (Below)',
         data: chartData.map(point => point.thrLevel1Min).filter(Boolean),
-        borderColor: 'rgba(245, 158, 11, 0.4)',
+        borderColor: '#dc2626',
         backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderDash: [3, 3],
+        borderWidth: 2,
+        borderDash: [5, 5],
         pointRadius: 0,
         spanGaps: false,
-        order: 2,
+        order: 1,
       },
-      // Green Zone (L1 range)
+      // Green Zone (Target Range)
       {
-        label: 'Optimal Zone (L1 range)',
+        label: 'Optimal Zone (Target Range)',
         data: chartData.map(point => point.thrLevel1Min).filter(Boolean),
         borderColor: 'rgba(34, 197, 94, 0.4)',
         backgroundColor: 'rgba(34, 197, 94, 0.1)',
@@ -284,7 +244,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
         order: 3,
       },
       {
-        label: 'Optimal Zone (L1 range) max',
+        label: 'Optimal Zone (Target Range) max',
         data: chartData.map(point => point.thrLevel1Max).filter(Boolean),
         borderColor: 'rgba(34, 197, 94, 0.4)',
         backgroundColor: 'transparent',
@@ -452,19 +412,16 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
           },
           filter: (legendItem) => {
             const hiddenLabels = [
-              'Alert Zone (beyond L2) min',
-              'Caution Zone (L1 to L2) min', 
-              'Optimal Zone (L1 range) max'
+              'Alert Zone (beyond Target Range) min',
+              'Optimal Zone (Target Range) max'
             ]
             // Hide zone-related legend items in standard view
             if (chartView === 'standard') {
               const zoneLabels = [
-                'Alert Zone (beyond L2)',
-                'Alert Zone (beyond L2) min',
-                'Caution Zone (L1 to L2)',
-                'Caution Zone (L1 to L2) min',
-                'Optimal Zone (L1 range)',
-                'Optimal Zone (L1 range) max',
+                'Alert Zone (beyond Target Range)',
+                'Alert Zone (beyond Target Range) min',
+                'Optimal Zone (Target Range)',
+                'Optimal Zone (Target Range) max',
                 'Mid-parental height'
               ]
               return !zoneLabels.includes(legendItem.text || '')
@@ -577,13 +534,10 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
               The <strong>dashed black line</strong> shows the mid-parental height growth curve based on your child's genetic potential.
             </p>
             <p>
-              <span className="text-green-600 font-medium">Green zone:</span> Optimal growth range (±1 SD from MPH)
+              <span className="text-green-600 font-medium">Green zone:</span> Optimal growth range (Target Range)
             </p>
             <p>
-              <span className="text-orange-600 font-medium">Orange zone:</span> Caution range (±1-2 SD from MPH)
-            </p>
-            <p>
-              <span className="text-red-600 font-medium">Red zone:</span> Alert range (beyond ±2 SD from MPH)
+              <span className="text-red-600 font-medium">Red zone:</span> Beyond Target Range
             </p>
           </div>
         )}

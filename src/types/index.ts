@@ -44,15 +44,11 @@ export interface GrowthResult {
 
 export interface MidParentalHeight {
   mph: number // Mid-parental height
-  thrLevel1Min: number // Target height range level 1 minimum
-  thrLevel1Max: number // Target height range level 1 maximum
-  thrLevel2Min: number // Target height range level 2 minimum
-  thrLevel2Max: number // Target height range level 2 maximum
+  thrLevel1Min: number // Target height range minimum
+  thrLevel1Max: number // Target height range maximum
   mphZScore: number // Z-score for mid-parental height
-  thrLevel1MinZScore: number // Z-score for target height range level 1 minimum
-  thrLevel1MaxZScore: number // Z-score for target height range level 1 maximum
-  thrLevel2MinZScore: number // Z-score for target height range level 2 minimum
-  thrLevel2MaxZScore: number // Z-score for target height range level 2 maximum
+  thrLevel1MinZScore: number // Z-score for target height range minimum
+  thrLevel1MaxZScore: number // Z-score for target height range maximum
 }
 
 export interface CalculationResults {
@@ -76,6 +72,4 @@ export interface ChartDataPoint {
   mphLine?: number
   thrLevel1Min?: number
   thrLevel1Max?: number
-  thrLevel2Min?: number
-  thrLevel2Max?: number
 }

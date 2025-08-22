@@ -293,30 +293,21 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
   
   let mph: number
   let thrLevel1Min: number, thrLevel1Max: number
-  let thrLevel2Min: number, thrLevel2Max: number
   
   if (childData.gender === 'male') {
     // Boys' MPH = (Mother's height + Father's height + 13) / 2
     mph = (motherHeightCm + fatherHeightCm + 13) / 2
     
-    // Boys THR Level 1: MPH ± 6.5 cm
-    thrLevel1Min = mph - 6.5
-    thrLevel1Max = mph + 6.5
-    
-    // Boys THR Level 2: MPH ± 10 cm
-    thrLevel2Min = mph - 10
-    thrLevel2Max = mph + 10
+    // Boys Target Range: MPH ± 10 cm
+    thrLevel1Min = mph - 10
+    thrLevel1Max = mph + 10
   } else {
     // Girls' MPH = (Mother's height + Father's height - 13) / 2
     mph = (motherHeightCm + fatherHeightCm - 13) / 2
     
-    // Girls THR Level 1: MPH ± 6 cm
-    thrLevel1Min = mph - 6
-    thrLevel1Max = mph + 6
-    
-    // Girls THR Level 2: MPH ± 8.5 cm
-    thrLevel2Min = mph - 8.5
-    thrLevel2Max = mph + 8.5
+    // Girls Target Range: MPH ± 8.5 cm
+    thrLevel1Min = mph - 8.5
+    thrLevel1Max = mph + 8.5
   }
   
   // Calculate Z-scores for mid-parental height values using 20-year-old standards
@@ -339,24 +330,18 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
   
   const { L, M, S } = adultLMS
   
-  // Calculate Z-scores for all mid-parental height values
+  // Calculate Z-scores for mid-parental height values
   const mphZScore = calculateZScore(mph, L, M, S)
   const thrLevel1MinZScore = calculateZScore(thrLevel1Min, L, M, S)
   const thrLevel1MaxZScore = calculateZScore(thrLevel1Max, L, M, S)
-  const thrLevel2MinZScore = calculateZScore(thrLevel2Min, L, M, S)
-  const thrLevel2MaxZScore = calculateZScore(thrLevel2Max, L, M, S)
   
   return {
     mph: Math.round(mph * 10) / 10, // Round to 1 decimal place
     thrLevel1Min: Math.round(thrLevel1Min * 10) / 10,
     thrLevel1Max: Math.round(thrLevel1Max * 10) / 10,
-    thrLevel2Min: Math.round(thrLevel2Min * 10) / 10,
-    thrLevel2Max: Math.round(thrLevel2Max * 10) / 10,
     mphZScore: Math.round(mphZScore * 100) / 100, // Round to 2 decimal places
     thrLevel1MinZScore: Math.round(thrLevel1MinZScore * 100) / 100,
-    thrLevel1MaxZScore: Math.round(thrLevel1MaxZScore * 100) / 100,
-    thrLevel2MinZScore: Math.round(thrLevel2MinZScore * 100) / 100,
-    thrLevel2MaxZScore: Math.round(thrLevel2MaxZScore * 100) / 100
+    thrLevel1MaxZScore: Math.round(thrLevel1MaxZScore * 100) / 100
   }
 }
 

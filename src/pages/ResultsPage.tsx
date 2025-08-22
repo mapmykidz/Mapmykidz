@@ -83,15 +83,10 @@ export const ResultsPage: React.FC = () => {
     }
     
     const { L, M, S } = lmsData
-    const mphZScore = midParentalHeight.mphZScore
     
-    // Calculate MPH height at current age using the MPH Z-score (same as chart)
-    // Note: mphAtCurrentAge is calculated but not used directly in this function
-    // as we're comparing against the target ranges directly
-    
-    // Calculate Level 1 target range (MPH ± 1 SD)
-    const level1MinZScore = mphZScore - 1
-    const level1MaxZScore = mphZScore + 1
+    // Calculate target range using the pre-calculated Z-scores
+    const level1MinZScore = midParentalHeight.thrLevel1MinZScore
+    const level1MaxZScore = midParentalHeight.thrLevel1MaxZScore
     
     let level1Min: number, level1Max: number
     if (L !== 0) {
@@ -102,38 +97,18 @@ export const ResultsPage: React.FC = () => {
       level1Max = M * Math.exp(S * level1MaxZScore)
     }
     
-    // Calculate Level 2 target range (MPH ± 2 SD)
-    const level2MinZScore = mphZScore - 2
-    const level2MaxZScore = mphZScore + 2
-    
-    let level2Min: number, level2Max: number
-    if (L !== 0) {
-      level2Min = M * Math.pow(1 + L * S * level2MinZScore, 1 / L)
-      level2Max = M * Math.pow(1 + L * S * level2MaxZScore, 1 / L)
-    } else {
-      level2Min = M * Math.exp(S * level2MinZScore)
-      level2Max = M * Math.exp(S * level2MaxZScore)
-    }
-    
-    // Calculate if child's height is within age-appropriate target ranges
-    const isWithinLevel1 = childHeightCm >= level1Min && childHeightCm <= level1Max
-    const isWithinLevel2 = childHeightCm >= level2Min && childHeightCm <= level2Max
+    // Calculate if child's height is within target range
+    const isWithinTargetRange = childHeightCm >= level1Min && childHeightCm <= level1Max
 
-    if (isWithinLevel1) {
+    if (isWithinTargetRange) {
       return {
-        message: "Your child's height is within the level 1 target range - normal.",
+        message: "Your child's height is within the target range - normal.",
         color: 'bg-green-50 border-green-400',
         textColor: 'text-green-800'
       }
-    } else if (isWithinLevel2) {
-      return {
-        message: "Your child's height is within the level 2 target range - needs closer monitoring.", 
-        color: 'bg-orange-50 border-orange-400',
-        textColor: 'text-orange-800'
-      }
     } else {
       return {
-        message: "Your child's height is outside of level 2 target height range - recommended to see a pediatrician or pediatric endocrinologist.",
+        message: "Your child's height is outside the target height range - recommended to see a pediatrician or pediatric endocrinologist.",
         color: 'bg-red-50 border-red-400', 
         textColor: 'text-red-800'
       }
@@ -249,12 +224,8 @@ export const ResultsPage: React.FC = () => {
              </div>
              <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 15px;">
                <div style="flex: 1;">
-                 <strong>Target Range (Level 1):</strong><br/>
+                 <strong>Target Range:</strong><br/>
                  ${midParentalHeight.thrLevel1Min.toFixed(1)} - ${midParentalHeight.thrLevel1Max.toFixed(1)} cm
-               </div>
-               <div style="flex: 1; text-align: right;">
-                 <strong>Target Range (Level 2):</strong><br/>
-                 ${midParentalHeight.thrLevel2Min.toFixed(1)} - ${midParentalHeight.thrLevel2Max.toFixed(1)} cm
                </div>
              </div>
              <div style="text-align: center; font-size: 12px; color: #6b7280;">
@@ -808,21 +779,12 @@ export const ResultsPage: React.FC = () => {
 
               <div className="space-y-3">
                 <div>
-                  <div className="text-sm font-medium text-gray-700 mb-1">Target Range (Level 1)</div>
+                  <div className="text-sm font-medium text-gray-700 mb-1">Target Range</div>
                   <div className="text-sm text-gray-600">
                     {midParentalHeight.thrLevel1Min.toFixed(1)} - {midParentalHeight.thrLevel1Max.toFixed(1)} cm
                   </div>
                   <div className="text-xs text-gray-500">
                     Z-scores: {midParentalHeight.thrLevel1MinZScore.toFixed(2)} to {midParentalHeight.thrLevel1MaxZScore.toFixed(2)}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-gray-700 mb-1">Target Range (Level 2)</div>
-                  <div className="text-sm text-gray-600">
-                    {midParentalHeight.thrLevel2Min.toFixed(1)} - {midParentalHeight.thrLevel2Max.toFixed(1)} cm
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    Z-scores: {midParentalHeight.thrLevel2MinZScore.toFixed(2)} to {midParentalHeight.thrLevel2MaxZScore.toFixed(2)}
                   </div>
                 </div>
               </div>
