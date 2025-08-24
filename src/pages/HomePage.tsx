@@ -39,8 +39,8 @@ export const HomePage: React.FC = () => {
   const measurementTypes = [
     {
       icon: Ruler,
-      title: 'Height-for-Age',
-      description: 'Monitor length/height-for-age percentiles and growth patterns',
+      title: 'Length/Height-for-Age',
+      description: 'Monitor length (0-2 years) and height (2-20 years) percentiles and growth patterns',
       color: 'from-primary-500 to-primary-600',
       bgColor: 'bg-primary-100',
       iconColor: 'text-primary-600'
@@ -75,7 +75,7 @@ export const HomePage: React.FC = () => {
             Complete Child Growth Tracker
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-            Track height, weight, and body composition percentiles using WHO (0-2 years) and CDC (2-20 years) standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
+            Track height, weight, and body composition percentiles using WHO and CDC standards. Calculate Z-scores and get professional-grade results with clear interpretations and advice.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link

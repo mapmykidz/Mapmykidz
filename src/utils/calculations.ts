@@ -224,7 +224,7 @@ export const calculateGrowthResult = (childData: ChildData, age: AgeCalculation)
   const percentile = zScoreToPercentile(zScore)
   
   // Generate interpretation and advice
-  const { interpretation, advice, isNormal } = generateInterpretation(percentile, zScore)
+  const { interpretation, advice, isNormal } = generateInterpretation(percentile, zScore, standard)
   
   return {
     zScore: Math.round(zScore * 100) / 100, // Round to 2 decimal places
@@ -239,37 +239,40 @@ export const calculateGrowthResult = (childData: ChildData, age: AgeCalculation)
 /**
  * Generate plain language interpretation and advice
  */
-export const generateInterpretation = (percentile: number, zScore: number) => {
+export const generateInterpretation = (percentile: number, zScore: number, standard: GrowthStandard) => {
   let interpretation = ''
   let advice = ''
   let isNormal = true
   
+  // Use "length" for WHO standards (0-2 years), "height" for CDC standards (2-20 years)
+  const measurementTerm = standard === 'WHO' ? 'length' : 'height'
+  
   if (percentile >= 97) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered very tall.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered very tall.`
     advice = 'Your child is growing very well and is much taller than average. Continue regular check-ups with your healthcare provider.'
     isNormal = true
   } else if (percentile >= 90) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered tall.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered tall.`
     advice = 'Your child is growing well and is taller than average. Continue monitoring growth every 6-12 months.'
     isNormal = true
   } else if (percentile >= 75) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered above average.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered above average.`
     advice = 'Your child is growing well. Continue regular monitoring and maintain healthy nutrition and exercise habits.'
     isNormal = true
   } else if (percentile >= 25) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered normal.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered normal.`
     advice = 'Your child is growing normally. Most children between the 10th and 90th percentile are growing well. Continue monitoring every 6-12 months.'
     isNormal = true
   } else if (percentile >= 10) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered below average but still within normal range.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered below average but still within normal range.`
     advice = 'Your child is growing within the normal range, though below average. Monitor growth closely and consult your healthcare provider if you have concerns.'
     isNormal = true
   } else if (percentile >= 3) {
-    interpretation = `Your child's height is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered short stature.`
+    interpretation = `Your child's ${measurementTerm} is at the ${percentile.toFixed(1)}th percentile, which means they are taller than ${percentile.toFixed(1)}% of children their age and gender. This is considered short stature.`
     advice = 'Your child may have short stature. Consider consulting a pediatrician or pediatric endocrinologist for evaluation.'
     isNormal = false
   } else {
-    interpretation = `Your child's height is below the 3rd percentile (Z-score: ${zScore.toFixed(2)}), which means they are shorter than 97% of children their age and gender. This indicates significant short stature.`
+    interpretation = `Your child's ${measurementTerm} is below the 3rd percentile (Z-score: ${zScore.toFixed(2)}), which means they are shorter than 97% of children their age and gender. This indicates significant short stature.`
     advice = 'Your child has significant short stature. It is recommended to consult with a pediatrician or pediatric endocrinologist for further evaluation and possible treatment options.'
     isNormal = false
   }

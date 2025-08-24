@@ -181,7 +181,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
     const baseDatasets = [
       // Child's measurement (always shown)
       {
-        label: `${childData.gender === 'male' ? 'Boy' : 'Girl'}'s height`,
+        label: `${childData.gender === 'male' ? 'Boy' : 'Girl'}'s ${age.ageInMonths <= 24 ? 'length' : 'height'}`,
         data: chartData.map((point, index) => {
           if (Math.abs(point.age - childAgeYears) < 0.05) {
             const isFirstMatch = chartData.findIndex(p => Math.abs(p.age - childAgeYears) < 0.05) === index;

@@ -15,8 +15,8 @@ export const AboutPage: React.FC = () => {
     },
     {
       icon: Users,
-      title: 'Height-for-Age Tracking',
-      description: 'Monitor height growth using WHO standards (0-2 years) and CDC charts (2-20 years) with mid-parental height estimates.',
+      title: 'Length/Height-for-Age Tracking',
+      description: 'Monitor length (0-2 years) and height (2-20 years) growth using WHO and CDC standards with mid-parental height estimates.',
     },
     {
       icon: Scale,
@@ -88,7 +88,7 @@ export const AboutPage: React.FC = () => {
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong>Height-for-age:</strong> WHO standards (0-2 years) and CDC charts (2-20 years)
+                  <strong>Length/Height-for-age:</strong> WHO standards (0-2 years) and CDC charts (2-20 years)
                 </div>
               </li>
               <li className="flex items-start space-x-2">
@@ -128,14 +128,14 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Height-for-Age Measurements</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Length/Height-for-Age Measurements</h3>
             <p className="text-gray-600 mb-3">
-              Height-for-age charts track how your child's height compares to other children of the same age and gender:
+              Length/Height-for-age charts track how your child's measurements compare to other children of the same age and gender:
             </p>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div><strong>WHO Height-for-age (0-2 years):</strong> Based on healthy, breastfed children from diverse populations</div>
+                <div><strong>WHO Length-for-age (0-2 years):</strong> Based on healthy, breastfed children from diverse populations</div>
               </li>
               <li className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -222,9 +222,9 @@ export const AboutPage: React.FC = () => {
         
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Height Interpretation</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Length/Height Interpretation</h3>
             <p className="text-gray-600 mb-3">
-              Height percentiles show how your child's height compares to other children of the same age and gender:
+              Length/Height percentiles show how your child's measurements compare to other children of the same age and gender:
             </p>
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -256,11 +256,11 @@ export const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div>
                     <div className="font-medium text-gray-900 mb-1">Target Range</div>
-                    <div className="text-gray-600">Your child's height is within the target range - normal.</div>
+                    <div className="text-gray-600">Normal growth within genetic potential.</div>
                   </div>
                   <div>
                     <div className="font-medium text-gray-900 mb-1">Outside Target Range</div>
-                    <div className="text-gray-600">Your child's height is outside the target height range - recommended to see a pediatrician or pediatric endocrinologist.</div>
+                    <div className="text-gray-600">Recommend to see a pediatric endocrinologist.</div>
                   </div>
                 </div>
               </div>

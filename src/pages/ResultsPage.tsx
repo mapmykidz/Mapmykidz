@@ -381,12 +381,12 @@ export const ResultsPage: React.FC = () => {
           {/* Content based on active tab */}
           {activeTab === 'height' && (
             <>
-              {/* Height Growth Percentile */}
+              {/* Length/Height Growth Percentile */}
           <div className="result-card">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <TrendingUp className="w-6 h-6 text-primary-600" />
-                    <h2 className="text-xl font-semibold text-gray-900">Height-for-age Percentile</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">{age.ageInMonths <= 24 ? 'Length' : 'Height'}-for-age Percentile</h2>
               </div>
               {getPercentileIcon(growthResult.isNormal)}
             </div>
@@ -424,20 +424,20 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
 
-              {/* Height Growth Chart */}
+              {/* Length/Height Growth Chart */}
           <div className="card">
             <div className="flex items-center space-x-3 mb-6">
               <BarChart3 className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-xl font-semibold text-gray-900">Height Growth Chart</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">{age.ageInMonths <= 24 ? 'Length' : 'Height'} Growth Chart</h2>
             </div>
             <GrowthChart results={results} />
           </div>
 
-              {/* Height Advice Section */}
+              {/* Length/Height Advice Section */}
           <div className="card">
             <div className="flex items-center space-x-3 mb-4">
               <Info className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-xl font-semibold text-gray-900">Height Recommendations</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">{age.ageInMonths <= 24 ? 'Length' : 'Height'} Recommendations</h2>
             </div>
             <div className={`p-4 rounded-lg border-l-4 ${
               growthResult.isNormal 
