@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Calculator, BarChart3, Info, Menu, X } from 'lucide-react'
+import { Home, Calculator, BarChart3, Info, HelpCircle, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { SEO, getDefaultSEOProps } from './SEO'
 
@@ -20,6 +20,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: 'Calculator', href: '/input', icon: Calculator },
     { name: 'Results', href: '/results', icon: BarChart3 },
     { name: 'About', href: '/about', icon: Info },
+    { name: 'FAQ', href: '/faq', icon: HelpCircle },
   ]
 
   const isActive = (path: string) => location.pathname === path

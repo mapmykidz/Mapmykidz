@@ -102,13 +102,13 @@ export const ResultsPage: React.FC = () => {
 
     if (isWithinTargetRange) {
       return {
-        message: "Your child's height is within the target range - normal.",
+        message: "Normal growth within genetic potential.",
         color: 'bg-green-50 border-green-400',
         textColor: 'text-green-800'
       }
     } else {
       return {
-        message: "Your child's height is outside the target height range - recommended to see a pediatrician or pediatric endocrinologist.",
+        message: "Recommend to see a pediatric endocrinologist.",
         color: 'bg-red-50 border-red-400', 
         textColor: 'text-red-800'
       }

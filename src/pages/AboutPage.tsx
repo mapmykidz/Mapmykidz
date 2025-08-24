@@ -383,16 +383,34 @@ export const AboutPage: React.FC = () => {
         <div className="flex items-start space-x-3">
           <Shield className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0" />
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">Medical Disclaimer</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">MEDICAL DISCLAIMER</h2>
             <p className="text-gray-700 mb-4">
-              MapMyKidz is designed for educational purposes only and should not be used as a substitute 
-              for professional medical advice, diagnosis, or treatment. Always consult with a qualified 
-              healthcare provider regarding any concerns about your child's growth or development.
+              This application is for EDUCATIONAL PURPOSES ONLY and should NEVER be used as a substitute for professional medical advice, diagnosis, or treatment.
             </p>
-            <p className="text-gray-700 text-sm">
-              If you have concerns about your child's growth, particularly if they fall below the 10th 
-              percentile or above the 90th percentile for height, weight, or BMI, or if there are significant 
-              changes in growth patterns, please consult with your pediatrician or a pediatric endocrinologist.
+            
+            <div className="mb-4">
+              <h3 className="font-semibold text-gray-900 mb-2">IMPORTANT WARNINGS:</h3>
+              <ul className="text-gray-700 text-sm space-y-1">
+                <li>• Results are estimates based on statistical models</li>
+                <li>• Individual growth patterns vary significantly</li>
+                <li>• This tool does not diagnose medical conditions</li>
+                <li>• Professional medical evaluation is required for concerns</li>
+                <li>• Use of this tool does not establish a doctor-patient relationship</li>
+              </ul>
+            </div>
+            
+            <div className="mb-4">
+              <h3 className="font-semibold text-gray-900 mb-2">WHEN TO CONSULT A HEALTHCARE PROVIDER:</h3>
+              <ul className="text-gray-700 text-sm space-y-1">
+                <li>• Measurements below 3rd percentile or above 97th percentile</li>
+                <li>• Sudden changes in growth patterns</li>
+                <li>• Concerns about child's development</li>
+                <li>• Any medical questions or concerns</li>
+              </ul>
+            </div>
+            
+            <p className="text-gray-700 text-sm font-medium">
+              By using this application, you acknowledge that you understand these limitations and agree to consult healthcare professionals for medical decisions.
             </p>
           </div>
         </div>
