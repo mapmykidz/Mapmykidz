@@ -67,7 +67,7 @@ export const FAQPage: React.FC = () => {
     {
       category: "Using & Understanding",
       question: "Why do I need parental heights?",
-      answer: "Parental heights calculate your child's genetic potential (mid-parental height) and target ranges. This shows if growth aligns with genetic potential, not just population averages. Gender differences are automatically accounted for."
+      answer: "Parental heights are used to calculate your child's genetic potential (mid-parental height) and target ranges. Genetic potential accounts for roughly 80% of the variation in height between people. This shows if growth aligns with genetic potential, not just population averages. Gender differences are automatically accounted for."
     },
 
     // Privacy & Technical
