@@ -18,7 +18,6 @@ export const getOrganizationSchema = (): OrganizationSchema => ({
   name: "MapMyKidz",
   url: BASE_URL,
   description: "Professional-grade child growth tracking application using WHO and CDC standards",
-  logo: `${BASE_URL}/icon-192x192.png`,
   sameAs: [
     "https://github.com/mapmykidz",
     "https://twitter.com/mapmykidz"
@@ -44,7 +43,6 @@ export const getWebApplicationSchema = (): WebApplicationSchema => ({
     "@type": "Organization",
     name: "MapMyKidz"
   },
-  screenshot: `${BASE_URL}/screenshot-desktop.png`,
   softwareVersion: "1.0.0",
   featureList: [
     "WHO Growth Standards (0-2 years)",

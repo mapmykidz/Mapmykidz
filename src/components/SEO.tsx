@@ -118,7 +118,6 @@ export const SEO: React.FC<SEOProps> = ({
 // Default SEO configuration for each page
 export const getDefaultSEOProps = (path: string): SEOProps => {
   const baseUrl = 'https://mapmykidz.com';
-  const defaultImage = `${baseUrl}/screenshot-desktop.png`;
 
   const pageConfigs: Record<string, SEOProps> = {
     '/': {
@@ -126,7 +125,6 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       description: 'Track your child\'s growth with WHO and CDC standards. Calculate percentiles, Z-scores, and mid-parental height with our easy-to-use growth tracker.',
       keywords: 'child growth tracker, pediatric growth charts, WHO growth standards, CDC growth charts, child height weight calculator, growth percentiles, Z-score calculator',
       canonical: baseUrl,
-      ogImage: defaultImage,
       ogType: 'website'
     },
     '/input': {
@@ -134,7 +132,6 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       description: 'Enter your child\'s measurements to calculate growth percentiles and Z-scores using WHO and CDC standards. Professional-grade accuracy.',
       keywords: 'growth calculator, child measurements, height weight calculator, pediatric growth calculator, WHO CDC standards',
       canonical: `${baseUrl}/input`,
-      ogImage: defaultImage,
       ogType: 'website'
     },
     '/results': {
@@ -142,7 +139,6 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       description: 'View your child\'s growth percentiles, Z-scores, and interactive growth charts based on WHO and CDC standards.',
       keywords: 'growth results, child percentiles, growth charts, Z-scores, pediatric growth results',
       canonical: `${baseUrl}/results`,
-      ogImage: defaultImage,
       ogType: 'website'
     },
     '/about': {
@@ -150,7 +146,6 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       description: 'Learn about MapMyKidz, our medical-grade growth tracking application using WHO and CDC standards for accurate child development monitoring.',
       keywords: 'about MapMyKidz, child growth tracking, medical standards, WHO CDC growth charts, pediatric growth monitoring',
       canonical: `${baseUrl}/about`,
-      ogImage: defaultImage,
       ogType: 'website'
     },
     '/faq': {
@@ -158,7 +153,6 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       description: 'Find answers to common questions about child growth tracking, WHO/CDC standards, Z-scores, and using MapMyKidz for accurate growth monitoring.',
       keywords: 'FAQ, frequently asked questions, child growth tracking, growth calculator help, pediatric growth questions, Z-scores, WHO CDC standards',
       canonical: `${baseUrl}/faq`,
-      ogImage: defaultImage,
       ogType: 'website'
     }
   };

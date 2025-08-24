@@ -94,8 +94,8 @@ public
 tmp/
 temp/
 
-# PWA icons (will be generated)
-public/icon-*.png
-public/pwa-*.png
-public/apple-touch-icon.png
-public/screenshot-*.png
+# PWA icons (will be generated later)
+# public/icon-*.png
+# public/pwa-*.png
+# public/apple-touch-icon.png
+# public/screenshot-*.png
