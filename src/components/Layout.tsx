@@ -17,7 +17,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: 'Home', href: '/', icon: Home },
-    { name: 'Calculator', href: '/input', icon: Calculator },
+    { name: 'Track', href: '/input', icon: Calculator },
     { name: 'Results', href: '/results', icon: BarChart3 },
     { name: 'About', href: '/about', icon: Info },
     { name: 'FAQ', href: '/faq', icon: HelpCircle },
