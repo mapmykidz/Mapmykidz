@@ -1,15 +1,15 @@
 {
   "name": "MapMyKidz - Child Growth Tracker",
   "short_name": "MapMyKidz",
-  "description": "Track your child's growth with WHO and CDC standards. Calculate percentiles, Z-scores, and mid-parental height.",
+  "description": "Track your child's growth with WHO and CDC standards. Calculate percentiles, Z-scores, and mid-parental height with professional-grade accuracy.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#16a34a",
+  "theme_color": "#10b981",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
-  "categories": ["health", "medical", "education"],
+  "categories": ["health", "medical", "education", "parenting"],
   "screenshots": [],
   "icons": [
     {

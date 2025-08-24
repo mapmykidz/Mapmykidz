@@ -16,3 +16,5 @@ Disallow: /api/
 Allow: /about
 Allow: /input
 Allow: /results
+Allow: /faq
+Allow: /contact
