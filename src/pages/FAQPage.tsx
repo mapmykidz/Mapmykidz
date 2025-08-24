@@ -129,7 +129,7 @@ export const FAQPage: React.FC = () => {
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           Find answers to common questions about using MapMyKidz. Can't find what you're looking for? 
-          <a href="#contact" className="text-primary-600 hover:text-primary-700 font-medium"> Contact us</a>.
+          <a href="/contact" className="text-primary-600 hover:text-primary-700 font-medium"> Contact us</a>.
         </p>
       </div>
 
@@ -213,7 +213,7 @@ export const FAQPage: React.FC = () => {
               Learn More About Our Methods
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
               Contact Us

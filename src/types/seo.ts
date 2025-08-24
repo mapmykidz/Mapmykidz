@@ -8,6 +8,12 @@ export interface OrganizationSchema {
   logo?: string;
   description?: string;
   sameAs?: string[];
+  contactPoint?: {
+    "@type": "ContactPoint";
+    contactType: string;
+    email: string;
+    availableLanguage: string;
+  };
 }
 
 export interface WebApplicationSchema {

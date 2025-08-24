@@ -12,12 +12,13 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Interactive Growth Charts**: Visual representation with optimal and alert zones
 - **Genetic View**: Compare child's growth to genetic potential
 - **Standard View**: Compare to population percentiles
+- **Age-Appropriate Terminology**: "Length" for 0-2 years, "Height" for 2-20 years
 
 ### 📊 Advanced Analytics
 - **LMS Method**: Medical-grade Z-score calculations using Lambda-Mu-Sigma parameters
 - **Precise Percentiles**: 3rd, 10th, 25th, 50th, 75th, 90th, 97th percentiles
 - **Age-Appropriate Metrics**: Weight-for-length (0-2 years), BMI (2-20 years)
-- **Growth Velocity**: Track growth patterns over time
+- **Parent Z-Score Fix**: Realistic Z-scores using CDC standards for adult heights
 - **Health Categories**: Underweight, Normal, Overweight, Obese classifications
 - **Medical Interpretations**: Professional-grade growth assessments
 
@@ -27,13 +28,16 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Responsive Charts**: Interactive growth charts with legend controls
 - **PDF Reports**: Comprehensive growth reports with charts and interpretations
 - **Multi-Unit Support**: Automatic conversion between metric and imperial units
+- **Contact Page**: Professional support and feedback system
+- **Consistent Design**: Green color theme throughout the application
 
 ## 🚀 Core Functionality
 
 ### 📈 Growth Metrics Supported
 
-#### Height Tracking
+#### Length/Height Tracking
 - **Age Range**: 0-20 years (WHO 0-2, CDC 2-20)
+- **Terminology**: "Length" for 0-2 years, "Height" for 2-20 years
 - **Units**: Centimeters (cm) and Inches
 - **Percentiles**: 3rd, 10th, 25th, 50th, 75th, 90th, 97th
 - **Z-Score Calculation**: Medical-grade accuracy using LMS method
@@ -86,6 +90,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
   - Boys: `(Mother + Father + 13) / 2`
   - Girls: `(Mother + Father - 13) / 2`
 - **Target Ranges**: Fixed centimeter distances converted to Z-scores
+- **Parent Z-Scores**: Always use CDC standards (2-20 years) for adult heights
 
 ## 🛡️ Privacy & Security
 
@@ -111,6 +116,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Real-time Validation**: Input validation with helpful error messages
 - **Multi-Unit Support**: Automatic conversion between metric and imperial units
 - **SEO Optimized**: Structured data and meta tags for search engines
+- **Contact System**: Professional support and feedback integration
 
 ## 🎨 User Experience
 
@@ -120,6 +126,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Educational Focus**: Learn about growth standards and percentiles
 - **Tabbed Interface**: Easy switching between height, weight, and BMI results
 - **Medical Guidance**: Clear advice on when to consult healthcare providers
+- **Age-Appropriate Language**: Correct medical terminology for each age group
 
 ## 🚀 Quick Start
 
@@ -255,12 +262,17 @@ We welcome contributions! Please read our contributing guidelines and submit pul
 - SEO optimization
 - Responsive design
 - Multi-unit support
+- Age-appropriate terminology
+- Parent Z-score calculations (CDC standards)
+- Contact page and support system
+- FAQ page with comprehensive help
+- Complete navigation system
 
 ### 🔄 In Progress
-- Legal documentation (Privacy Policy, Terms of Service)
-- Medical authority building (endorsements, partnerships)
-- User feedback integration
+- PWA icon generation
 - Performance optimization
+- Bundle size reduction
+- Error boundary implementation
 
 ### 📋 Planned Features
 - Mobile app versions (iOS/Android)
@@ -268,6 +280,8 @@ We welcome contributions! Please read our contributing guidelines and submit pul
 - Advanced analytics dashboard
 - Healthcare provider portal
 - Educational content expansion
+- Testing infrastructure
+- Accessibility improvements
 
 ## 🏆 Acknowledgments
 
@@ -280,6 +294,7 @@ We welcome contributions! Please read our contributing guidelines and submit pul
 ## 📞 Support
 
 For questions, feedback, or support:
+- **Email Support**: support@mapmykidz.com
 - **GitHub Issues**: Report bugs or request features
 - **Documentation**: Check our comprehensive guides
 - **Medical Questions**: Consult with healthcare providers
