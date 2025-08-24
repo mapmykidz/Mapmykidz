@@ -280,7 +280,7 @@ export const generateInterpretation = (percentile: number, zScore: number) => {
 /**
  * Calculate Mid-parental Height and Target Height Range
  */
-export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: number): MidParentalHeight => {
+export const calculateMidParentalHeight = (childData: ChildData): MidParentalHeight => {
   // Validate child data
   if (!childData || !childData.gender || !childData.motherHeight || !childData.motherHeightUnit || 
       !childData.fatherHeight || !childData.fatherHeightUnit) {
@@ -310,17 +310,13 @@ export const calculateMidParentalHeight = (childData: ChildData, ageInMonths: nu
     thrLevel1Max = mph + 8.5
   }
   
-  // Calculate Z-scores for mid-parental height values using 20-year-old standards
+  // Calculate Z-scores for mid-parental height values using 20-year-old CDC standards
   // Following the image specification: "Calculate SDS scoring for MPH + THR based on 20y old boy/girl"
+  // ALWAYS use CDC standards for parent Z-scores (2-20 years), regardless of child's age
   const adultAgeMonths = 20 * 12 // 20 years = 240 months
-  const standard = ageInMonths <= 24 ? 'WHO' : 'CDC'
   
-  let lmsData: LMSData[]
-  if (standard === 'WHO') {
-    lmsData = getWHOData(childData.gender)
-  } else {
-    lmsData = getCDCData(childData.gender)
-  }
+  // Always use CDC data for parent Z-scores (adult height standards)
+  const lmsData = getCDCData(childData.gender)
   
   // Get LMS values for adult age (20 years)
   const adultLMS = interpolateLMS(adultAgeMonths, lmsData)
