@@ -152,6 +152,14 @@ export const getDefaultSEOProps = (path: string): SEOProps => {
       canonical: `${baseUrl}/about`,
       ogImage: defaultImage,
       ogType: 'website'
+    },
+    '/faq': {
+      title: 'FAQ - MapMyKidz | Frequently Asked Questions',
+      description: 'Find answers to common questions about child growth tracking, WHO/CDC standards, Z-scores, and using MapMyKidz for accurate growth monitoring.',
+      keywords: 'FAQ, frequently asked questions, child growth tracking, growth calculator help, pediatric growth questions, Z-scores, WHO CDC standards',
+      canonical: `${baseUrl}/faq`,
+      ogImage: defaultImage,
+      ogType: 'website'
     }
   };
 

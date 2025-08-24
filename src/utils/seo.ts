@@ -245,6 +245,11 @@ export const getPageSchema = (path: string): PageSchema => {
       name: "About MapMyKidz - Child Growth Tracking",
       description: "Learn about MapMyKidz, our medical-grade growth tracking application using WHO and CDC standards for accurate child development monitoring.",
       mainEntity: getFAQSchema()
+    },
+    '/faq': {
+      name: "FAQ - MapMyKidz | Frequently Asked Questions",
+      description: "Find answers to common questions about child growth tracking, WHO/CDC standards, Z-scores, and using MapMyKidz for accurate growth monitoring.",
+      mainEntity: getFAQSchema()
     }
   };
 
@@ -289,6 +294,8 @@ export const getPageSchemas = (path: string): any[] => {
   if (path === '/') {
     schemas.push(getMedicalApplicationSchema());
   } else if (path === '/about') {
+    schemas.push(getFAQSchema());
+  } else if (path === '/faq') {
     schemas.push(getFAQSchema());
   } else if (path === '/input') {
     schemas.push(getHowToSchema());
