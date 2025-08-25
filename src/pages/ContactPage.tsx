@@ -40,8 +40,8 @@ export const ContactPage: React.FC = () => {
       icon: Mail,
       title: 'Email Support',
       description: 'Get help with technical issues, questions, feedback, or suggestions about the app',
-      contact: 'support@mapmykidz.com',
-      action: 'mailto:support@mapmykidz.com',
+      contact: 'support@mapmykidz.sg',
+action: 'mailto:support@mapmykidz.sg',
       color: 'from-primary-500 to-primary-600',
       bgColor: 'bg-primary-100',
       iconColor: 'text-primary-600'

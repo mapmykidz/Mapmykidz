@@ -25,7 +25,7 @@ export const getOrganizationSchema = (): OrganizationSchema => ({
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "support@mapmykidz.com",
+    email: "support@mapmykidz.sg",
     availableLanguage: "English"
   }
 });

@@ -316,7 +316,7 @@ We welcome contributions! Please read our contributing guidelines and submit pul
 ## 📞 Support
 
 For questions, feedback, or support:
-- **Email Support**: support@mapmykidz.com
+- **Email Support**: support@mapmykidz.sg
 - **GitHub Issues**: Report bugs or request features
 - **Documentation**: Check our comprehensive guides
 - **Medical Questions**: Consult with healthcare providers
