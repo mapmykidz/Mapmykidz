@@ -2,7 +2,7 @@
 
 A professional-grade Progressive Web App for tracking child growth using WHO and CDC standards. Calculate percentiles, Z-scores, and mid-parental height with medical-grade accuracy for height, weight, and BMI measurements.
 
-**Medical-Grade Accuracy • Privacy-First Design • Educational Focus**
+**Medical-Grade Accuracy • Privacy-First Design • Educational Focus • Inclusive for All Families**
 
 ## ✨ Latest Features
 
@@ -13,6 +13,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Genetic View**: Compare child's growth to genetic potential
 - **Standard View**: Compare to population percentiles
 - **Age-Appropriate Terminology**: "Length" for 0-2 years, "Height" for 2-20 years
+- **Adoption Support**: Optional parent height information for adopted children
 
 ### 📊 Advanced Analytics
 - **LMS Method**: Medical-grade Z-score calculations using Lambda-Mu-Sigma parameters
@@ -21,6 +22,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Parent Z-Score Fix**: Realistic Z-scores using CDC standards for adult heights
 - **Health Categories**: Underweight, Normal, Overweight, Obese classifications
 - **Medical Interpretations**: Professional-grade growth assessments
+- **Flexible Parent Data**: Support for families without biological parent information
 
 ### 🎨 Improved User Experience
 - **Alert Zone Visualization**: Red dotted lines for areas beyond target range
@@ -30,6 +32,7 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Multi-Unit Support**: Automatic conversion between metric and imperial units
 - **Contact Page**: Professional support and feedback system
 - **Consistent Design**: Green color theme throughout the application
+- **Inclusive Design**: Support for adoptive families and diverse family structures
 
 ## 🚀 Core Functionality
 
@@ -81,6 +84,21 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - Clinically validated
 - Official CDC LMS parameters for height, weight, and BMI
 
+### 👨‍👩‍👧‍👦 Family Support Features
+
+#### Adoption Support
+- **Optional Parent Heights**: Skip parent height information for adopted children
+- **Clean Interface**: No adoption messaging or explanations required
+- **Flexible Validation**: Parent heights not required when skipped
+- **Population Standards**: Growth evaluation based on population percentiles
+- **Inclusive Design**: Supports all family structures and backgrounds
+
+#### Parent Height Information
+- **Biological Parents**: Enter mother's and father's heights for MPH calculations
+- **Adoptive Families**: Skip parent heights and use population standards
+- **Mixed Families**: Enter available parent information as needed
+- **No Pressure**: Completely optional feature with no judgment or explanation
+
 #### Calculation Methods
 - **Z-Score**: `Z = (measurement/M)^L - 1) / (L × S)` when L ≠ 0
 - **Percentile**: Normal distribution CDF conversion
@@ -127,6 +145,8 @@ A professional-grade Progressive Web App for tracking child growth using WHO and
 - **Tabbed Interface**: Easy switching between height, weight, and BMI results
 - **Medical Guidance**: Clear advice on when to consult healthcare providers
 - **Age-Appropriate Language**: Correct medical terminology for each age group
+- **Inclusive Design**: Supports adoptive families and diverse family structures
+- **No Judgment**: Optional features with no pressure or explanation required
 
 ## 🚀 Quick Start
 
@@ -267,6 +287,8 @@ We welcome contributions! Please read our contributing guidelines and submit pul
 - Contact page and support system
 - FAQ page with comprehensive help
 - Complete navigation system
+- **Adoption support with optional parent heights**
+- **Inclusive design for all family structures**
 
 ### 🔄 In Progress
 - PWA icon generation

@@ -34,7 +34,8 @@ const initialChildData: Partial<ChildData> = {
   motherHeight: undefined,
   fatherHeight: undefined,
   motherHeightUnit: 'cm',
-  fatherHeightUnit: 'cm'
+  fatherHeightUnit: 'cm',
+  isAdopted: false
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -61,7 +62,8 @@ export const useAppStore = create<AppState>((set) => ({
         motherHeight: undefined,
         fatherHeight: undefined,
         motherHeightUnit: 'cm',
-        fatherHeightUnit: 'cm'
+        fatherHeightUnit: 'cm',
+        isAdopted: false
       }
     })
   },

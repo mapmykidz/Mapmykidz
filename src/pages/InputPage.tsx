@@ -37,7 +37,22 @@ export const InputPage: React.FC = () => {
 	}
 
   const handleInputChange = (field: keyof ChildData, value: any) => {
-    setChildData({ [field]: value })
+    // If adoption checkbox is being checked, clear parent height data
+    if (field === 'isAdopted' && value === true) {
+      setChildData({ 
+        [field]: value,
+        motherHeight: undefined,
+        fatherHeight: undefined
+      })
+      // Clear parent height errors when adoption is checked
+      setErrors(prev => ({ 
+        ...prev, 
+        motherHeight: '', 
+        fatherHeight: '' 
+      }))
+    } else {
+      setChildData({ [field]: value })
+    }
     
     // Clear error when user starts typing
     if (errors[field]) {
@@ -226,8 +241,8 @@ export const InputPage: React.FC = () => {
       }
     }
 
-    // motherHeight (required only if height is selected)
-    if (data.selectedMeasurements?.includes('height')) {
+    // motherHeight (required only if height is selected and not adopted)
+    if (data.selectedMeasurements?.includes('height') && !data.isAdopted) {
       if (!data.motherHeight || data.motherHeight <= 0) {
         newErrors.motherHeight = 'Please enter mother\'s height'
       } else {
@@ -239,8 +254,8 @@ export const InputPage: React.FC = () => {
       }
     }
 
-    // fatherHeight (required only if height is selected)
-    if (data.selectedMeasurements?.includes('height')) {
+    // fatherHeight (required only if height is selected and not adopted)
+    if (data.selectedMeasurements?.includes('height') && !data.isAdopted) {
       if (!data.fatherHeight || data.fatherHeight <= 0) {
         newErrors.fatherHeight = 'Please enter father\'s height'
       } else {
@@ -561,11 +576,27 @@ export const InputPage: React.FC = () => {
             Parent heights are used to calculate mid-parental height and target height range
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* Adoption Checkbox */}
+          <div className="flex items-center space-x-3 mb-6">
+            <input
+              type="checkbox"
+              id="isAdopted"
+              checked={childData.isAdopted || false}
+              onChange={(e) => handleInputChange('isAdopted', e.target.checked)}
+              className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+            />
+            <label htmlFor="isAdopted" className="text-sm font-medium text-gray-700">
+              Skip parent height information
+            </label>
+          </div>
+
+          {/* Parent Height Fields (only if not skipped) */}
+          {!childData.isAdopted && (
+            <div className="grid md:grid-cols-2 gap-6">
             {/* Mother's Height */}
             <div>
               <label htmlFor="motherHeight" className="block text-sm font-medium text-gray-700 mb-2">
-                Mother's Height *
+                Mother's Height
               </label>
               <div className="flex space-x-2">
                 <input
@@ -595,7 +626,7 @@ export const InputPage: React.FC = () => {
             {/* Father's Height */}
             <div>
               <label htmlFor="fatherHeight" className="block text-sm font-medium text-gray-700 mb-2">
-                Father's Height *
+                Father's Height
               </label>
               <div className="flex space-x-2">
                 <input
@@ -622,6 +653,7 @@ export const InputPage: React.FC = () => {
               )}
             </div>
           </div>
+          )}
         </div>
         )}
 

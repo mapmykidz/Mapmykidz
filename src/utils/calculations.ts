@@ -283,7 +283,12 @@ export const generateInterpretation = (percentile: number, zScore: number, stand
 /**
  * Calculate Mid-parental Height and Target Height Range
  */
-export const calculateMidParentalHeight = (childData: ChildData): MidParentalHeight => {
+export const calculateMidParentalHeight = (childData: ChildData): MidParentalHeight | null => {
+  // If child is adopted and parent heights are not provided, return null
+  if (childData.isAdopted && (!childData.motherHeight || !childData.fatherHeight)) {
+    return null
+  }
+  
   // Validate child data
   if (!childData || !childData.gender || !childData.motherHeight || !childData.motherHeightUnit || 
       !childData.fatherHeight || !childData.fatherHeightUnit) {

@@ -17,6 +17,7 @@ export interface ChildData {
   fatherHeight: number
   motherHeightUnit: HeightUnit
   fatherHeightUnit: HeightUnit
+  isAdopted?: boolean
 }
 
 export interface AgeCalculation {
@@ -55,7 +56,7 @@ export interface CalculationResults {
   childData: ChildData
   age: AgeCalculation
   growthResult: GrowthResult
-  midParentalHeight: MidParentalHeight
+  midParentalHeight?: MidParentalHeight | null
   chartData: ChartDataPoint[]
 }
 

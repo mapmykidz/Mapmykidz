@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -38,6 +38,13 @@ interface GrowthChartProps {
 export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
   const { childData, age, midParentalHeight } = results
   const [chartView, setChartView] = useState<ChartView>('standard')
+
+  // Auto-switch to standard view if genetic view is selected but no MPH data
+  useEffect(() => {
+    if (chartView === 'genetic' && !midParentalHeight) {
+      setChartView('standard')
+    }
+  }, [chartView, midParentalHeight])
 
   const chartData = useMemo(() => {
     const data: ChartDataPoint[] = []
@@ -128,7 +135,7 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
       let thrLevel1Min: number | undefined
       let thrLevel1Max: number | undefined
 
-      if (usingCDC && ageMonths >= 24) {
+      if (usingCDC && ageMonths >= 24 && midParentalHeight) {
         // Calculate MPH growth curve using the MPH Z-score applied to each age point
         const mphZScore = midParentalHeight.mphZScore
         
@@ -500,11 +507,15 @@ export const GrowthChart: React.FC<GrowthChartProps> = ({ results }) => {
             </button>
             <button
               onClick={() => setChartView('genetic')}
+              disabled={!midParentalHeight}
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 chartView === 'genetic'
                   ? 'bg-green-100 text-green-700 border border-green-200'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : midParentalHeight
+                    ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
               }`}
+              title={!midParentalHeight ? 'Genetic potential view requires parent height information' : ''}
             >
               <Target className="w-4 h-4" />
               <span>Genetic Potential</span>

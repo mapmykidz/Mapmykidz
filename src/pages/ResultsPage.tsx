@@ -214,6 +214,7 @@ export const ResultsPage: React.FC = () => {
            </div>
          </div>
         
+                 ${midParentalHeight ? `
                  <div style="margin-bottom: 30px;">
            <h2 style="color: #374151; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">Mid-Parental Height</h2>
            <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-top: 15px;">
@@ -234,6 +235,7 @@ export const ResultsPage: React.FC = () => {
              </div>
            </div>
          </div>
+                 ` : ''}
         
         <div style="margin-bottom: 30px;">
           <h2 style="color: #374151; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">Recommendations</h2>
@@ -755,8 +757,8 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Mid-Parental Height - Only show for height tab */}
-          {activeTab === 'height' && (
+          {/* Mid-Parental Height - Only show for height tab and when available */}
+          {activeTab === 'height' && midParentalHeight && (
           <div className="card">
             <div className="flex items-center space-x-3 mb-4">
               <Users className="w-5 h-5 text-primary-600" />
@@ -800,6 +802,8 @@ export const ResultsPage: React.FC = () => {
             </div>
           </div>
           )}
+
+
 
           {/* Quick Actions */}
           <div className="card">
